@@ -1,6 +1,6 @@
 # Bikram - 90 minuten
 
-## Startup
+## This is the **Startup** sequence
 
 - Welcome new students (names!)
 - Hot in room ...
@@ -27,6 +27,17 @@
 - text 3
 - text 4
 - text 5
+
+---
+
+- [breath in deep](6:beep)
+- [breath out slow](6:beep)
+- [breath in](6:beep)
+- [breath out](6:beep)
+- [breath in deep](6:beep)
+- [breath out slow](6:beep)
+- [breath in](6:beep)
+- [breath out](6:beep)
 
 ## Deep breeding
 
