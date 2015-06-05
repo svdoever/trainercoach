@@ -2,7 +2,7 @@
 
 ## WELCOME
 
-- Good morning! 
+- Good morning!! 
 - We **begin** our practice today with **stillness**
 - Please come to **seated** position with your legs crossed and **spine straight**
 - **Sit in lotus** if you are able
