@@ -7181,9 +7181,12 @@ body {
 .indexItem {
   font-size: 18px;
   font-weight: bold; }
-.stepList li {
-  padding-top: 4px;
-  padding-bottom: 4px; }
+.stepList {
+  border-width: 3px !important; }
+  .stepList li {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-width: 2px; }
 .stepItem {
   font-size: 18px;
   font-weight: bold; }
