@@ -1,14 +1,12 @@
 {
   "icons": [
     {
-      "src": "http://svdoever.github.io/trainercoach/images/touch/icon-128x128.png",
+      "src": "http://2ba67a99.ngrok.io/images/touch/icon-128x128.png",
       "sizes": "128x128"
     }
   ],
-  "display": "fullscreen",
-  "orientation": "portrait",
-  "name": "Trainer-Coach",
+  "name": "TC",
   "short_name": "TC",
-  "start_url": "http://svdoever.github.io/trainercoach/index.html",
-  "scope": "/trainercoach"
+  "start_url": "/index.html",
+  "scope": "/"
 }
