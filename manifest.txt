@@ -5,8 +5,8 @@
       "sizes": "128x128"
     }
   ],
-  "name": "TC",
-  "short_name": "TC",
+  "name": "Trainer-Coach",
+  "short_name": "TrainerCoach",
   "start_url": "http://svdoever.github.io/trainercoach/index.html",
   "scope": "/trainercoach"
 }
