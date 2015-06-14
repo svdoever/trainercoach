@@ -40382,7 +40382,7 @@ define('scripts/ExerciseManager',["require", "exports", "./CommonMarkDsl"], func
     return ExerciseManager;
 });
 //# sourceMappingURL=ExerciseManager.js.map;
-// react musr be required befor jquery ad app framework to be able to stop event propagation
+// react must be required before jquery and app framework to be able to stop event propagation
 // See http://stackoverflow.com/questions/24415631/reactjs-syntheticevent-stoppropagation-only-works-with-react-events
 require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager', 'scripts/ExerciseManager'], function (React, $, appframework, FastClick, IndexManager, ExerciseManager) {
     $.afui.ready(function () {
@@ -40554,6 +40554,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
 
                 renderExercises(this.props.link);
                 $.afui.drawer.hide('#leftMenu','left');
+                return true; // prevent bubble
             }
         });
 
@@ -40636,6 +40637,8 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
 
 
                 popupDiv.on("click", function() { popup.hide(); });
+
+                return true; // prevent bubble
             }
         });
 
@@ -40876,6 +40879,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
                 var exerciseManager = this.props.exerciseManager;
                 exerciseManager.exerciseStateSetup();
                 exerciseManager.tellStateChanged();
+                return true; // prevent bubble
             },
 
             timePointsClick: function(e) {
@@ -40884,6 +40888,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
                 var exerciseManager = this.props.exerciseManager;
                 exerciseManager.exerciseStateTimePoints();
                 exerciseManager.tellStateChanged();
+                return true; // prevent bubble
             },
 
             teardownClick: function(e) {
@@ -40892,6 +40897,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
                 var exerciseManager = this.props.exerciseManager;
                 exerciseManager.exerciseStateTeardown();
                 exerciseManager.tellStateChanged();
+                return true; // prevent bubble
             },
 
             prevClick: function (exerciseManager, e) {
@@ -40899,6 +40905,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
 
                 exerciseManager.prevExercise();
                 renderExercise(exerciseManager, e);
+                return true; // prevent bubble
             },
 
             nextClick: function (exerciseManager, e) {
@@ -40906,6 +40913,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
 
                 exerciseManager.nextExercise();
                 renderExercise(exerciseManager);
+                return true; // prevent bubble
             }
         });
 
