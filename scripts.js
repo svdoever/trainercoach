@@ -40394,6 +40394,12 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
 
         $.afui.launch();
 
+        var reactPreventPropagation = function(e) {
+            // We don't want to the event to propagate to App Framework/JQuery
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+        }
+
         var _canvas, _context, _fraction, _radius;
 
         _radius = null;
@@ -40542,9 +40548,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
             },
 
             onClick: function (e) {
-                // We don't want to the event to propagate to App Framework/JQuery
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+                reactPreventPropagation(e);
 
                 console.log("Selected exercises: " + this.props.link);
 
@@ -40591,9 +40595,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
             },
 
             onClick: function(item, e) {
-                // We don't want to the event to propagate to App Framework/JQuery
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+                reactPreventPropagation(e);
 
                 var popup = $.afui.popup( {
                     suppressTitle: true,
@@ -40869,9 +40871,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
             },
 
             setupClick: function(e) {
-                // We don't want to the event to propagate to App Framework/JQuery
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+                reactPreventPropagation(e);
 
                 var exerciseManager = this.props.exerciseManager;
                 exerciseManager.exerciseStateSetup();
@@ -40879,9 +40879,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
             },
 
             timePointsClick: function(e) {
-                // We don't want to the event to propagate to App Framework/JQuery
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+                reactPreventPropagation(e);
 
                 var exerciseManager = this.props.exerciseManager;
                 exerciseManager.exerciseStateTimePoints();
@@ -40889,9 +40887,7 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
             },
 
             teardownClick: function(e) {
-                // We don't want to the event to propagate to App Framework/JQuery
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+                reactPreventPropagation(e);
 
                 var exerciseManager = this.props.exerciseManager;
                 exerciseManager.exerciseStateTeardown();
@@ -40899,18 +40895,14 @@ require(['react', 'jquery', 'appframework', 'fastclick', 'scripts/IndexManager',
             },
 
             prevClick: function (exerciseManager, e) {
-                // We don't want to the event to propagate to App Framework/JQuery
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+                reactPreventPropagation(e);
 
                 exerciseManager.prevExercise();
                 renderExercise(exerciseManager, e);
             },
 
             nextClick: function (exerciseManager, e) {
-                // We don't want to the event to propagate to App Framework/JQuery
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
+                reactPreventPropagation(e);
 
                 exerciseManager.nextExercise();
                 renderExercise(exerciseManager);
