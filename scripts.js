@@ -6912,7 +6912,7 @@ require([/*'jquery', 'appframework',*/ 'fastclick', 'scripts/IndexManager', 'scr
             render: function () {
                 var rootUri = this.props.indexManager.rootUri;
                 var training = this.props.indexManager.links.map(function (link, i) {
-                    var fullLink = /*rootUri + "/" +*/ link.link;
+                    var fullLink = rootUri + "/" + link.link;
                     return (React.createElement(IndexEntry, {key: i, title: link.title.short, link: fullLink}));
                 });
 
@@ -7097,8 +7097,13 @@ require([/*'jquery', 'appframework',*/ 'fastclick', 'scripts/IndexManager', 'scr
                                                        count: exerciseManager.exerciseTimePointsCount(), 
                                                        onComplete: this.timerDone});
                 }
+
+                panelSetupClassName = "";
+                panelTeardownClassName = "";
+                panelTimePointsClassName = ""
+
                 return (
-                    React.createElement("div", null, 
+                    React.createElement("div", {className: "panel active"}, 
                         React.createElement("div", {className: panelSetupClassName, id: "setup", ref: "panelSetup"}, 
                             React.createElement("h1", null, currentExercise.name.short), 
                             React.createElement(Steps, {id: "setup", items: currentExercise.setupSteps, rootUri: rootUri})
@@ -7263,6 +7268,19 @@ require([/*'jquery', 'appframework',*/ 'fastclick', 'scripts/IndexManager', 'scr
             }
         });
 
+
+        var App = React.createClass({displayName: "App",
+            propTypes: {
+
+            },
+
+            render: function() {
+                return (
+                    React.createElement("div", null, "APP")
+                )
+            }
+        })
+
         function selectPanelFromExerciseState(exerciseManager) {
             var panel = "#setup"; // defensive programming
             if (exerciseManager.isExerciseStateSetup()) {
@@ -7278,29 +7296,29 @@ require([/*'jquery', 'appframework',*/ 'fastclick', 'scripts/IndexManager', 'scr
         }
 
         function renderIndex(source) {
-            //var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
-            //$.get(source + "?v=" + Math.random().toString(), function (indexMarkdown) {
-            //    $.afui.hideMask();
-            //    var indexManager =  new IndexManager(source, indexMarkdown, this.rootUri);
-            //    React.render(<Index key="index" indexManager={indexManager}/>, document.getElementById('mountIndexLeftMenu'));
-            //}.bind(context));
             var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
-            var indexMarkdown = '# Menu\n\n- [Bikram 90](Bikram90.md)';
-            var indexManager =  new IndexManager(source, indexMarkdown, this.rootUri);
-            React.render(React.createElement(Index, {key: "index", indexManager: indexManager}), document.getElementById('mountIndexLeftMenu'));
+            $.get(source + "?v=" + Math.random().toString(), function (indexMarkdown) {
+                $.afui.hideMask();
+                var indexManager =  new IndexManager(source, indexMarkdown, this.rootUri);
+                React.render(React.createElement(Index, {key: "index", indexManager: indexManager}), document.getElementById('mountIndexLeftMenu'));
+            }.bind(context));
+            //var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
+            //var indexMarkdown = '# Menu\n\n- [Bikram 90](Bikram90.md)';
+            //var indexManager =  new IndexManager(source, indexMarkdown, this.rootUri);
+            //React.render(<Index key="index" indexManager={indexManager}/>, document.getElementById('mountIndexLeftMenu'));
         }
 
         function renderExercises(source) {
-            //var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
-            //$.get(source + "?v=" + Math.random().toString(), function (exercisesMarkdown) {
-            //    $.afui.hideMask();
-            //    var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
-            //    renderExercise(exerciseManager);
-            //}.bind(context));
             var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
-            var exercisesMarkdown = '# Evolation Yoga 90\n\n## WELCOME\n\n- Good morning!! \n- We **begin** our practice today with **stillness**\n- Please come to **seated** position with your legs crossed and **spine straight**\n- **Sit in lotus** if you are able\n- **Focus** your **eyes one point** in the mirror and bring your awareness to your breath\n- Set your **intention** for your **practice** today\n- **Be here, present**, for the next 90 minutes\n- **-- ADDITIONAL INSTRUCTIONS --** FOR THE BEGINNING OF CLASS. CHOOSE ONE OR TWO:\n- If at any time in the class you are **nauseous or light headed**, sit down and focus on your breath, eyes focused on one point. Find your balance and rejoin the class when you are ready. As a beginner take care of yourself, try to stay in the room\n- This is a **moving meditation**\n- Low **slow flow** with your **breath**\n- This class is primarily a **listening and breathing** exercise\n- Use **continuous energy**, in correct form, while paying attention to your breathing in every posture\n- Be completely **still in-between** the **postures**\n- Most importantly we **balance** conscious breathing with body awareness and focused eyes\n- **No bouncing** in and out of the pose\n- **Find stillness** at the end of the pose in your maximum expression\n- Whether you do 1% depth, or 99% depth, you get **100% benefit**. As long as you try the right way and you stay focused and don’t give up\n- Before you even start, **make up your mind** to just keep going\n- The **postures** are not the goal. They are a tool to create **connection** between **body** and **mind**\n- **Have faith**. Believe in yourself, your spirit, your mind, your goals\n- **Mind** control **and self control**, know when and how to use it\n- Use **determination and willpower**. Go until you reach results and then keep going\n- **Concentration = meditation** = achieving your goals\n- Create **Maximum energy and stillness** at the same time\n- **Be present**, inclusive, responsible and authentic. Practice your Yoga\n\n## STANDING **DEEP BREATHING** – PRANAYAMA\n\n- Please stand up and **focus** in the **mirror**\n- We start with the **breathing exercise**, Pranayama Deep Breathing\n- Please **listen carefully**\n- **Inhale** by the **nose** and **exhale** by the **mouth**\n- Inhales and exhales should be controlled with the **muscles** in the **throat**\n- **Breathe** as much as possible, as **long** as possible, as **slow** as possible, as **deep** as possible\n- [As a **beginner**, **first watch** a few breaths and join in once you understand]\n- Put your **feet together**, toes and heels touching each other\n- All ten **fingers interlaced** under the chin, full webbing to webbing grip\n- Touch your **knuckles** to the **chin**, **thumbs** touching the **throat**\n- Nice **relaxed shoulders**\n- Once the first breath starts, **elbows never drop** below shoulder height\n- **Swallow** a couple of times\n- **Look** in the **mirror**\n- **Concentrate. Meditate**\n\n---\n\n- [Begin, inhale](6:beep)\n- [Exhale](6:beep)\n- [Inhale nose, full longs](6:beep)\n- [Exhale mouth, loud ahhh, empty lungs](6:beep)\n- [Inhale stretch elbows wide and up, eyes mirror](6:beep)\n- [Exhale, head back, knocles against chin](6:beep)\n- [Inhale](6:beep)\n- [Exhale](6:beep)\n\n\n## Exercise 2\n\n- do this\n- do that\n- do such\n- do so\n\n---\n\n- [breath in deep](6:beep)\n- [breath out slow](6:beep)\n- [breath in](6:beep)\n- [breath out](6:beep)\n- [breath in deep](6:beep)\n- [breath out slow](6:beep)\n- [breath in](6:beep)\n- [breath out](6:beep)\n\n---\n\n- do this\n- do that\n- do such\n- do so\n\n## Exercise 2\n- and now 1\n- and now 2\n- and now 3\n- and now 4\n- and now 5\n\n## Exercise 3\n- this is one\n- this is two\n- this is three\n- this is four\n- this is five';
-            var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
-            renderExercise(exerciseManager);
+            $.get(source + "?v=" + Math.random().toString(), function (exercisesMarkdown) {
+                $.afui.hideMask();
+                var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
+                renderExercise(exerciseManager);
+            }.bind(context));
+            //var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
+            //var exercisesMarkdown = '# Evolation Yoga 90\n\n## WELCOME\n\n- Good morning!! \n- We **begin** our practice today with **stillness**\n- Please come to **seated** position with your legs crossed and **spine straight**\n- **Sit in lotus** if you are able\n- **Focus** your **eyes one point** in the mirror and bring your awareness to your breath\n- Set your **intention** for your **practice** today\n- **Be here, present**, for the next 90 minutes\n- **-- ADDITIONAL INSTRUCTIONS --** FOR THE BEGINNING OF CLASS. CHOOSE ONE OR TWO:\n- If at any time in the class you are **nauseous or light headed**, sit down and focus on your breath, eyes focused on one point. Find your balance and rejoin the class when you are ready. As a beginner take care of yourself, try to stay in the room\n- This is a **moving meditation**\n- Low **slow flow** with your **breath**\n- This class is primarily a **listening and breathing** exercise\n- Use **continuous energy**, in correct form, while paying attention to your breathing in every posture\n- Be completely **still in-between** the **postures**\n- Most importantly we **balance** conscious breathing with body awareness and focused eyes\n- **No bouncing** in and out of the pose\n- **Find stillness** at the end of the pose in your maximum expression\n- Whether you do 1% depth, or 99% depth, you get **100% benefit**. As long as you try the right way and you stay focused and don’t give up\n- Before you even start, **make up your mind** to just keep going\n- The **postures** are not the goal. They are a tool to create **connection** between **body** and **mind**\n- **Have faith**. Believe in yourself, your spirit, your mind, your goals\n- **Mind** control **and self control**, know when and how to use it\n- Use **determination and willpower**. Go until you reach results and then keep going\n- **Concentration = meditation** = achieving your goals\n- Create **Maximum energy and stillness** at the same time\n- **Be present**, inclusive, responsible and authentic. Practice your Yoga\n\n## STANDING **DEEP BREATHING** – PRANAYAMA\n\n- Please stand up and **focus** in the **mirror**\n- We start with the **breathing exercise**, Pranayama Deep Breathing\n- Please **listen carefully**\n- **Inhale** by the **nose** and **exhale** by the **mouth**\n- Inhales and exhales should be controlled with the **muscles** in the **throat**\n- **Breathe** as much as possible, as **long** as possible, as **slow** as possible, as **deep** as possible\n- [As a **beginner**, **first watch** a few breaths and join in once you understand]\n- Put your **feet together**, toes and heels touching each other\n- All ten **fingers interlaced** under the chin, full webbing to webbing grip\n- Touch your **knuckles** to the **chin**, **thumbs** touching the **throat**\n- Nice **relaxed shoulders**\n- Once the first breath starts, **elbows never drop** below shoulder height\n- **Swallow** a couple of times\n- **Look** in the **mirror**\n- **Concentrate. Meditate**\n\n---\n\n- [Begin, inhale](6:beep)\n- [Exhale](6:beep)\n- [Inhale nose, full longs](6:beep)\n- [Exhale mouth, loud ahhh, empty lungs](6:beep)\n- [Inhale stretch elbows wide and up, eyes mirror](6:beep)\n- [Exhale, head back, knocles against chin](6:beep)\n- [Inhale](6:beep)\n- [Exhale](6:beep)\n\n\n## Exercise 2\n\n- do this\n- do that\n- do such\n- do so\n\n---\n\n- [breath in deep](6:beep)\n- [breath out slow](6:beep)\n- [breath in](6:beep)\n- [breath out](6:beep)\n- [breath in deep](6:beep)\n- [breath out slow](6:beep)\n- [breath in](6:beep)\n- [breath out](6:beep)\n\n---\n\n- do this\n- do that\n- do such\n- do so\n\n## Exercise 2\n- and now 1\n- and now 2\n- and now 3\n- and now 4\n- and now 5\n\n## Exercise 3\n- this is one\n- this is two\n- this is three\n- this is four\n- this is five';
+            //var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
+            //renderExercise(exerciseManager);
         }
 
         function renderExercise(exerciseManager) {
