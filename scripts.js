@@ -7102,22 +7102,56 @@ require([/*'jquery', 'appframework',*/ 'fastclick', 'scripts/IndexManager', 'scr
                 panelTeardownClassName = "";
                 panelTimePointsClassName = ""
 
-                return (
-                    React.createElement("div", {className: "panel active"}, 
-                        React.createElement("div", {className: panelSetupClassName, id: "setup", ref: "panelSetup"}, 
+                if (exerciseManager.isExerciseStateSetup()) {
+                    return (
+                        React.createElement("div", {className: "panel active"}, 
                             React.createElement("h1", null, currentExercise.name.short), 
                             React.createElement(Steps, {id: "setup", items: currentExercise.setupSteps, rootUri: rootUri})
-                        ), 
-                        React.createElement("div", {className: panelTimePointsClassName, id: "timepoints", ref: "panelTimePoints"}, 
-                            React.createElement("h1", null, currentExercise.name.short), 
-                            renderTimePoints
-                        ), 
-                        React.createElement("div", {className: panelTeardownClassName, id: "teardown", ref: "panelTeardown"}, 
+                        )
+                    );
+                }
+
+                if (exerciseManager.isExerciseStateTeardown()) {
+                    return (
+                        React.createElement("div", {className: "panel active"}, 
                             React.createElement("h1", null, currentExercise.name.short), 
                             React.createElement(Steps, {id: "teardown", items: currentExercise.teardownSteps, rootUri: rootUri})
                         )
+                    );
+                }
+
+                if (exerciseManager.isExerciseStateTimePoints()) {
+                    return (
+                        React.createElement("div", {className: "panel active"}, 
+                            React.createElement("h1", null, currentExercise.name.short), 
+                            renderTimePoints
+                        )
+                    );
+                }
+
+                return (
+                    React.createElement("div", {className: "panel active"}, 
+                        React.createElement("h1", null, currentExercise.name.short), 
+                        "THIS STATE SHOULD NEVER BE REACHED"
                     )
-                );
+                )
+
+                //return (
+                //    <div className="panel active">
+                //        <div className={panelSetupClassName} id="setup" ref="panelSetup">
+                //            <h1>{currentExercise.name.short}</h1>
+                //            <Steps id="setup" items={currentExercise.setupSteps} rootUri={rootUri}/>
+                //        </div>
+                //        <div className={panelTimePointsClassName} id="timepoints" ref="panelTimePoints">
+                //            <h1>{currentExercise.name.short}</h1>
+                //            {renderTimePoints}
+                //        </div>
+                //        <div className={panelTeardownClassName} id="teardown" ref="panelTeardown">
+                //            <h1>{currentExercise.name.short}</h1>
+                //            <Steps id="teardown" items={currentExercise.teardownSteps} rootUri={rootUri}/>
+                //        </div>
+                //    </div>
+                //);
             }
         });
 
@@ -7281,19 +7315,19 @@ require([/*'jquery', 'appframework',*/ 'fastclick', 'scripts/IndexManager', 'scr
             }
         })
 
-        function selectPanelFromExerciseState(exerciseManager) {
-            var panel = "#setup"; // defensive programming
-            if (exerciseManager.isExerciseStateSetup()) {
-                panel = "#setup";
-            }
-            if (exerciseManager.isExerciseStateTimePoints()) {
-                panel = "#timepoints";
-            }
-            if (exerciseManager.isExerciseStateTeardown()) {
-                panel = "#teardown";
-            }
-            $.afui.loadContent("#setup", false, false, "slide");
-        }
+        //function selectPanelFromExerciseState(exerciseManager) {
+        //    var panel = "#setup"; // defensive programming
+        //    if (exerciseManager.isExerciseStateSetup()) {
+        //        panel = "#setup";
+        //    }
+        //    if (exerciseManager.isExerciseStateTimePoints()) {
+        //        panel = "#timepoints";
+        //    }
+        //    if (exerciseManager.isExerciseStateTeardown()) {
+        //        panel = "#teardown";
+        //    }
+        //    $.afui.loadContent("#setup", false, false, "slide");
+        //}
 
         function renderIndex(source) {
             var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
