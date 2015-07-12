@@ -40844,17 +40844,113 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
     return Exercises;
 });
 //# sourceMappingURL=../components/Exercises.js.map;
+define('scripts/components/Index',['require','react'],function(require) {
+    var React = require('react');
+
+    var reactPreventPropagation = function(e) {
+        // We don't want to the event to propagate to App Framework/JQuery
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+    }
+
+    var IndexEntry = React.createClass({displayName: "IndexEntry",
+        propTypes: {
+            title: React.PropTypes.string.isRequired,
+            link: React.PropTypes.string.isRequired,
+            handle: React.PropTypes.func.isRequired
+        },
+
+        render: function () {
+            return (
+                React.createElement("li", {className: "indexItem"}, 
+                    React.createElement("a", {href: "", dataLink: this.props.link, className: "icon home", 
+                       onClick: this.onClick}, this.props.title)
+                )
+            );
+        },
+
+        onClick: function (e) {
+            reactPreventPropagation(e);
+
+            console.log("Selected exercises: " + this.props.link);
+
+            this.props.handle(this.props.link);
+            $.afui.drawer.hide('#leftMenu', 'left');
+        }
+    });
+
+    var Index = React.createClass({displayName: "Index",
+        propTypes: {
+            indexManager: React.PropTypes.any.isRequired,
+            handle: React.PropTypes.func.isRequired
+        },
+
+        render: function () {
+            var _this = this;
+            var rootUri = this.props.indexManager.rootUri;
+            var training = this.props.indexManager.links.map(function (link, i) {
+                var fullLink = rootUri + "/" + link.link;
+                return (React.createElement(IndexEntry, {key: i, title: link.title.short, link: fullLink, handle: _this.props.handle}));
+            });
+
+            return (React.createElement("ul", {className: "list inset"}, training));
+        }
+    });
+
+    return Index;
+});
+//# sourceMappingURL=../components/Index.js.map;
+define('scripts/components/Menu',['require','react','scripts/components/Index'],function(require) {
+    var React = require('react');
+    var Index = require('scripts/components/Index');
+
+    var Menu = React.createClass({displayName: "Menu",
+        propTypes: {
+            indices: React.PropTypes.any.isRequired,
+            handle: React.PropTypes.func.isRequired
+        },
+
+        render: function () {
+            var _this = this;
+            var indices = this.props.indices;
+            return (
+                React.createElement("div", null, 
+                    
+                        indices.map(function (index, i) {
+                            if (index.state === 3) {
+                                return (
+                                    React.createElement("div", {key: "menuindex" + i}, 
+                                        React.createElement("h1", null, index.title), 
+                                        React.createElement(Index, {indexManager: index.manager, handle: _this.props.handle})
+                                    )
+                                )
+                            }
+                        })
+                    
+                )
+            )
+        }
+    });
+
+    return Menu;
+});
+
+//# sourceMappingURL=../components/Menu.js.map;
 // react must be required before jquery and app framework to be able to stop event propagation
 // See http://stackoverflow.com/questions/24415631/reactjs-syntheticevent-stoppropagation-only-works-with-react-events
 require(['jquery', 'appframework', 'fastclick',
         'scripts/StateManager', 'scripts/IndexManager', 'scripts/ExerciseManager',
         'scripts/components/CircularTimer',
         'scripts/components/Exercises',
+        'scripts/components/Index',
+        'scripts/components/Menu',
         'react'],
         function ($, appframework, FastClick,
                   StateManager, IndexManager, ExerciseManager,
                   CircularTimer,
                   Exercises,
+                  Index,
+                  Menu,
                   React) {
     $.afui.ready(function () {
         $.afui.useInternalRouting = true;
@@ -40871,58 +40967,12 @@ require(['jquery', 'appframework', 'fastclick',
             e.nativeEvent.stopImmediatePropagation();
         }
 
-
-
-        var IndexEntry = React.createClass({displayName: "IndexEntry",
-            propTypes: {
-                title: React.PropTypes.string.isRequired,
-                link: React.PropTypes.string.isRequired
-            },
-
-            render: function () {
-                return (
-                    React.createElement("li", {className: "indexItem"}, 
-                        React.createElement("a", {href: "", dataLink: this.props.link, className: "icon home", 
-                           onClick: this.onClick}, this.props.title)
-                    )
-                );
-            },
-
-            onClick: function (e) {
-                reactPreventPropagation(e);
-
-                console.log("Selected exercises: " + this.props.link);
-
-                renderExercises(this.props.link);
-                $.afui.drawer.hide('#leftMenu','left');
-            }
-        });
-
-        var Index = React.createClass({displayName: "Index",
-            propTypes: {
-                indexManager: React.PropTypes.any.isRequired
-            },
-
-            render: function () {
-                var rootUri = this.props.indexManager.rootUri;
-                var training = this.props.indexManager.links.map(function (link, i) {
-                    var fullLink = rootUri + "/" + link.link;
-                    return (React.createElement(IndexEntry, {key: i, title: link.title.short, link: fullLink}));
-                });
-
-                return (React.createElement("ul", {className: "list inset"}, training));
-            }
-        });
-
-
-
         var ExercisesHeader = React.createClass({displayName: "ExercisesHeader",
             propTypes: {
                 exerciseManager: React.PropTypes.any.isRequired
             },
 
             timerExpired: function() {
-
             },
 
             render: function () {
@@ -41070,34 +41120,7 @@ require(['jquery', 'appframework', 'fastclick',
             }
         });
 
-        var Menu = React.createClass({displayName: "Menu",
-            propTypes: {
-                indices: React.PropTypes.any.isRequired
-            },
-
-            render: function () {
-                var _this = this;
-                var indices = this.props.indices;
-                return (
-                    React.createElement("div", null, 
-                        
-                            indices.map(function(index, i) {
-                                if (index.state === 3) {
-                                    return (
-                                        React.createElement("div", {key: "menuindex" + i}, 
-                                            React.createElement("h1", null, index.title), 
-                                            React.createElement(Index, {indexManager: index.manager})
-                                        )
-                                    )
-                                }
-                            })
-                        
-                    )
-                )
-            }
-        });
-
-        var Indices = React.createClass({displayName: "Indices",
+         var Indices = React.createClass({displayName: "Indices",
             propTypes: {
                 indices: React.PropTypes.any.isRequired
             },
@@ -41142,7 +41165,7 @@ require(['jquery', 'appframework', 'fastclick',
         }
 
         function renderApp(state) {
-            React.render(React.createElement(Menu, {key: "menu", indices: state.indices}), document.getElementById('mountIndexLeftMenu'));
+            React.render(React.createElement(Menu, {key: "menu", indices: state.indices, handle: renderExercises}), document.getElementById('mountIndexLeftMenu'));
             if (!!state.manager) {
                 renderExercise(state.manager);
             }
