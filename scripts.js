@@ -40846,17 +40846,16 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 //# sourceMappingURL=../components/Exercises.js.map;
 // react must be required before jquery and app framework to be able to stop event propagation
 // See http://stackoverflow.com/questions/24415631/reactjs-syntheticevent-stoppropagation-only-works-with-react-events
-define('scripts/app',['require','jquery','appframework','fastclick','scripts/StateManager','scripts/IndexManager','scripts/ExerciseManager','scripts/components/CircularTimer','scripts/components/Exercises','react'],function(require) {
-    var $ = require('jquery');
-    var appframework = require('appframework');
-    var FastClick = require('fastclick');
-    var StateManager = require('scripts/StateManager');
-    var IndexManager = require('scripts/IndexManager');
-    var ExerciseManager = require('scripts/ExerciseManager');
-    var CircularTimer = require('scripts/components/CircularTimer');
-    var Exercises = require('scripts/components/Exercises');
-    var React = require('react');
-
+require(['jquery', 'appframework', 'fastclick',
+        'scripts/StateManager', 'scripts/IndexManager', 'scripts/ExerciseManager',
+        'scripts/components/CircularTimer',
+        'scripts/components/Exercises',
+        'react'],
+        function ($, appframework, FastClick,
+                  StateManager, IndexManager, ExerciseManager,
+                  CircularTimer,
+                  Exercises,
+                  React) {
     $.afui.ready(function () {
         $.afui.useInternalRouting = true;
         $.afui.setBackButtonVisibility(false);
@@ -41156,3 +41155,5 @@ define('scripts/app',['require','jquery','appframework','fastclick','scripts/Sta
     });
 });
 //# sourceMappingURL=app.js.map;
+define("scripts/app", function(){});
+
