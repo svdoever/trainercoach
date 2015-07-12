@@ -7175,13 +7175,16 @@ body {
   padding: 0; }
 .panel h1 {
   margin-top: 8px;
+  margin-bottom: 8px;
   background: #ff9b00;
   color: white;
-  text-align: center; }
+  text-align: center;
+  border-radius: 6px; }
 .indexItem {
   font-size: 18px;
   font-weight: bold; }
 .stepList {
+  margin: 0px !important;
   border-width: 3px !important; }
   .stepList li {
     padding-top: 6px;
@@ -7199,3 +7202,17 @@ body {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px; }
+.progressTraining {
+  width: 100%; }
+.progressExercise {
+  width: 100%;
+  color: #ff9b00; }
+.popupOuter {
+  border-width: 6px;
+  border-color: #ff9b00; }
+.popupContent {
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  border: 0px; }

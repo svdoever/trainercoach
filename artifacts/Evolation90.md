@@ -1,8 +1,8 @@
-# Evolation Yoga 90
+# Evolation Yoga 90 (minutes:90)
 
-## WELCOME
+## WELCOME (seconds:65)
 
-- Good morning!! 
+- Good morning
 - We **begin** our practice today with **stillness**
 - Please come to **seated** position with your legs crossed and **spine straight**
 - **Sit in lotus** if you are able
@@ -57,43 +57,302 @@
 - [Exhale, head back, knocles against chin](6:beep)
 - [Inhale](6:beep)
 - [Exhale](6:beep)
-
-
-## Exercise 2
-
-- do this
-- do that
-- do such
-- do so
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
+- [Inhale](6:beep)
+- [Exhale](6:beep)
 
 ---
 
-- [breath in deep](6:beep)
-- [breath out slow](6:beep)
-- [breath in](6:beep)
-- [breath out](6:beep)
-- [breath in deep](6:beep)
-- [breath out slow](6:beep)
-- [breath in](6:beep)
-- [breath out](6:beep)
+- -- INHALES --
+- Leg muscles strong, kneecaps lift up
+- Hips a little bit forward, hip muscles tight, contracted
+- Suck your stomach in. Rib cage visible in the mirror
+- Stomach in, depression of the abdominal wall, contraction of the abdominal muscles
+- Open your ribcage, open your lungs
+- Open up your chest and your ribcage, stretching the intercostal muscles between the ribs
+- Expand your lungs to their maximum capacity
+- Spine straight, stretch up out of your waist toward the ceiling
+- STRETCH your elbows more up toward the ceiling. Warm up your shoulders/arms/ hands
+- Look in the mirror. Eyes always open to keep you from getting dizzy
+- Take six seconds to bring your head down
+- Keep the throat engaged, the face and mouth relaxed
+- Every breath, deeper, fuller, longer, more air in your lungs
+- Each time, especially towards the end, try to inhale a little bit more than last time, more and more and more
+- -- EXHALES --
+- Keep more of your bodyweight in the heels
+- Legs straight, don’t bend your knees
+- Stomach IN, chest UP. Don’t collapse
+- No backward bending. Spine straight
+- Shoulders down and wide, away from the ears
+- Palms, wrists, forearms, and elbows touch
+- Elbows forward more, away from your chest as far as they go, elbows towards the ceiling
+- Deltoids forward, with scapula, shoulder blades
+- Look all the way back, until you see the wall behind you
+- Slowly push your head way back so you create a very deep stretching and opening feeling in the neck
+- The more you exhale the more fresh oxygen you can inhale next time
+- When you think you cannot exhale anymore, suck your stomach in squeeze the last air out
+- As long and slow as possible
+- -- BOTH --
+- Keep maximum weight in the heels
+- Squeeze/zip up your legs to the midline/center line of your body
+- Keep the leg muscles engaged for a strong foundation/base
+- Stretch UP out of your waist
+- Don’t let your chest collapse
+- Use your throat
+- Keep your grip tight, ten fingers interlaced
+- Arms and head movements synchronized
+- ONLY the arms and head move
+- The breath and the movements are synchronized. Slow down your arms and head to match the pace of
+- the breath
+- The more you open your lungs, the more air you hold in your lungs
+- You are improving the elasticity of the lungs
+- The more you put into opening breathing, the better the postures feel throughout class
+- Use this exercise to warm up your whole body for class
+- Very slowly, not too quickly
+- The slower you go the better. You will use your lungs more
+- This breathing exercise warms your body up from the inside while the heat works on that from the outside
 
----
+## **HALF MOON** POSE WITH HANDS TO FEET POSE – ARDHA-CHANDRASANA WITH PAD A-HASTASANA
 
-- do this
-- do that
-- do such
-- do so
+- Put your feet together, heels and toes touching each other
+- Arms over your head sideways put your palms together. Interlace the fingers, release the index fingers,
+- thumbs crossed. Keep a tight grip, palms together up to the wrists, throughout the entire posture
+- Reach up to the ceiling and stretch right and left several times, right and left, right and left. Keep your
+- eyes focused in the mirror. Loosen up your hips, your spine and shoulders. Warm up your whole body at
+- the beginning of class
+- Stop in the middle
+- Elbows locked, arms with the ears, no gap
+- Make sure your bodyweight is in the heels, spine straight
+- Arms and head back. Chin up. Concentrate one point in the mirror
+- Inhale breathing full lungs. Stretch up out of the waist, touch the ceiling
+- Slowly push your hips to the left, creating a deep stretch on the left side of the body
+- Now stretch your upper body to the right, without bending your elbows or knees. Keep everything
+- parallel to the mirror
+- Hips more forward, upper body back more, weight in the heels. Open up the whole front side of your
+- body and keep the back of your body tall and long. Chin up, a gap between chin and chest, arms back
+- Keep your wrists straight. Stomach in!
+- Inhale breathing lift your chest up; exhale push your hips more to the left. Continuously keep pushing
+- your both hips to the left. Reach and stretch, keep pushing, push, push more. Go to your maximum
+- point, hold still. Push more
+- Inhale, come up and stop in the middle. Other side
+- **-- ADDITIONAL INSTRUCTIONS --**
+- Continuously push your hips to the left, beyond your flexibility, creating a tremendous stretch on the left
+- side of your body, all over, from your fingertips to your toes
+- Push your left hip forward, to keep your both hips in one line. Right shoulder forward, to open your chest more. Everything same distance to the mirror
+- Inhale, create strength; exhale, come deeper in the pose
+- This is lateral flexion of the spine
+- This pose is increasing your heart rate, warming up your body for the rest of class
+- Hips forward, opening your hips and pelvis. Upper body back, opening up your chest and ribcage
 
-## Exercise 2
-- and now 1
-- and now 2
-- and now 3
-- and now 4
-- and now 5
+## **BACKWARD BENDING**
+- Everybody moving together; give it all you have!
+- Take a deep breath, full lungs, stretch up to touch the ceiling, bring your head back as far as you can
+- Look behind you. Arms back immediately, try to touch the wall behind you
+- Inhale, lift your chest up. Bend your spine backwards from coccyx to neck. Lower back, middle back,
+- upper back, your total spine is backward bending
+- Inhale, chest up, push your upper body back, and go deeper into the backbend. Exhale, push your
+- stomach, legs, hips forward towards the mirror. Keep your legs straight, leg muscles fully engaged
+- Arms back more, right next to the ears
+- Keep breathing!
+- Arms back, look back, way back, go further; try to touch the floor behind you
+- Inhale, come up, and stop in the middle, eyes in the mirror
+- **-- ADDITIONAL INSTRUCTIONS --**
+- You should feel the backbend throughout the whole spine, not just in the lower back. Use strength to lift - up as you come back more
+- Look back, eyes look towards the floor; your body follows your eyes
+- Backward bending is the most healing motion for the spine
 
-## Exercise 3
-- this is one
-- this is two
-- this is three
-- this is four
-- this is five
+## **HANDS TO FEET POSE**
+- Suck your stomach in, bend your knees and come down with a straight spine, put your hands on the floor in front of you.
+- Bend your knees one by one and move your hips several times, right and left, right and left. 
+- Do a little dance. Shake your hips, shake your head, everything. 
+- Even squat a few times to open the hips and lower back. 
+- Let your head hang down to lengthen your spine, relax your neck muscles. 
+- Make sure your back is totally relaxed, nice and loose. Always be very mindful when forward bending
+- Slide your fingers down your calves and then underneath the heels, stepping on all five fingers of each hand
+- Pinky fingers touching each other, thumbs with the index fingers. 
+- Point your fingers in the same direction as your toes
+- Forearms touching the calf muscles, throughout the posture
+- If you cannot grab your heels yet, hold on to the calves or sides of the feet. 
+- Maintain the grip
+- Touch your stomach on the thighs, chest on the knees, and face on the legs below the knees. 
+- No gap anywhere, compact body
+- Pull your heels as hard as possible. Stretch your body down from the lower spine towards the floor
+- Shoulders away from your ears
+- Slowly push your knees back
+- Try to straighten your legs, creating an intense opening stretch all over your legs. 
+- Try to lock your knees; Lift your kneecaps up your thighs, eventually your legs will be straight
+- Exhale breathing and roll forward, more weight in your toes
+- Keep the gap closed between body and legs. Eyes open. 
+- Touch your face to your legs. Stretch your spine down towards the floor
+- Inhale breathing, come up with a straight spine, arms and head together
+- Stop in the middle
+- Arms down by your side. Stand still, eyes focused in the mirror
+- **-- ADDITIONAL INSTRUCTIONS --**
+- No light or air between your body and the legs
+- Continuously keep pulling, without interruption. The harder you pull with your arms, the more you can stretch your spine
+- Your goal is to touch your head to your feet, while your legs are straight and your whole body touching your legs; creating 360 degree stretch from coccyx to toes, coccyx to forehead
+- This is a traction pose
+- Your head is below your heart. This an inversion pose, good for your brain and circulation
+
+## **AWKWARD POSE - 1** - UTKATASANA
+
+- Step your right foot to the right, approximately six inches apart. Hip-width between your toes and heels
+- Heels invisible behind the toes. Don’t change your feet throughout the entire posture
+- Inhale, arms up parallel to the floor. Keep your five fingers together, touching each other. 
+- Arms straight, elbows locked, triceps muscles nice and tight, contracted. Strong arms, no tension in the shoulders
+- Shoulders down, chest up. 
+- Stretch your arms forward towards your armpits in the mirror
+- Take a deep breath. Exhale breathing, suck your stomach in and hold it. 
+- Sit down until your hips are chair-height. 
+- Feet flat, 100 percent body weight in the heels. Keep your toes on the floor
+- Lift your chest up and bend your total spine backwards 
+- Bring your upper body back
+- Suck your stomach in, compress the abdominal wall, contract the abdominal muscles. 
+- Try to make your rib cage visible in the mirror
+- Open your knees, keep hip-distance between your toes, heels, knees and fingertips
+- Chest up, chin up. 
+- Shoulders relaxed, elbows locked, arms stretching forward towards the mirror
+- Lean back, chest up
+- Suck your stomach in more, sit down more. 
+- Upper body back more at the end
+- Inhale breathing and come up
+- Keep your arms up there
+- **-- ADDITIONAL INSTRUCTIONS --**
+- Feet parallel, looks like the number 11
+- You are trying to fall down backwards
+- Shoulders down, Chest up
+
+## **AWKWARD POSE - 2** - UTKATASANA
+
+- Complete concentration, focus one point in the mirror
+- Stand up on your toes maximum. 
+- Stretch your spine, chest, head, whole upper body up towards the ceiling
+- Keep stretching your spine up, suck your stomach in, and sit down, until your hips are chair-height
+- Thighs parallel to the floor, hips same level as your knees. 
+- Hips should not go down below the chair, you are sitting on the chair
+- Bring your knees up, chest up, upper body back, spine straight
+- Try to touch your shoulders to the wall behind you. 
+- Shoulders relaxed, elbows locked, arms stretching forward towards the mirror
+- Come up higher on your toes, knees up towards the ceiling 
+- The higher you get on your toes, the easier you can balance
+- Inhale breathing and come up, spine straight, keep your arms up
+- **-- ADDITIONAL INSTRUCTIONS --**
+- Imagine you are being pulled up towards the ceiling
+- Continuously stretch your spine up
+- The more contracted your arms are, the lighter they feel
+
+## **AWKWARD POSE - 3** - UTKATASANA
+
+- Come up on your toes a little bit and bring your knees together
+- Take deep breath
+- Exhale breathing, suck your stomach in, spine straight
+- Sit down, as slow as possible, at least 10 counts
+- All the way down, like you’re sliding down against the wall, until there is half inch gap between your hips and your heels
+- Continuously stretch your spine up towards the ceiling
+- Upper body back, spine straight 
+- Keep your knees together and forward towards the mirror
+- Hips a little bit higher than your knees. 
+- Thighs parallel to the floor, arms parallel to your thighs, spine perfectly straight
+- Shoulders relaxed, triceps contracted, arms stretching forward towards the mirror
+- Take a deep breath, spine straight, stomach in, slowly stretch up, upper body back
+- Keep your knees together the whole way up
+- Feet back together, arms down by your side. Relax, be completely still
+- **-- ADDITIONAL INSTRUCTIONS --**
+- You are warming up the lower body for class
+
+## **EAGLE POSE** - GARURASANA
+
+- Feet together. Eyes focused in the mirror. Be still
+- Inhale. Arms over your head sideways
+- Exhale. Bring your right arm under your left arm, thumbs towards your face
+- Cross your arms at your elbows and at your wrists
+- Bring your hands in front of your face, palms together, thumbs towards your face, little fingers towards the mirror
+- Pull your elbows down towards the floor, until your fingertips come below your nose. This will help to open up your shoulders
+- Take a deep breath. Stomach in
+- Exhale and sit all the way down, upper body back
+- Stay down there
+- Lift your right leg up and bring it over your left leg, as high as possible. The higher you get your leg on
+- the thigh, the more room you create to twist your legs
+- Twist your legs. 
+- Put your right foot behind your
+- left calf muscle. 
+- Sit down more
+- Slide your foot down towards the ankle
+- No gap between the ankle and the calf muscle, no gap between the knees
+- Arch your upper body back
+- Bring your knees to the right, upper body to the left, to get your feet, knees, elbows and hands in a vertical line below your nose
+- Right hip back and up
+- Put more body weight in the left heel
+- If your foot is coming out, sit down more
+- If you’re losing the balance, upper body back more
+- Suck your stomach in. Sit down more
+- Pull your elbows down more
+- Upper body back more at the end
+- Inhale breathing, come up
+- Other side
+- **-- ADDITIONAL INSTRUCTIONS --**
+- If you are unable to bring your palms together, interlace your fingers, or hold on to your wrists
+- If your shoulders are still really tight, hold on to your shoulders
+- Try to get your wrists straight
+- All toes are visible in the mirror
+- The lower you get your hips, the more you can twist your legs, the more compression you create in your joints, the more benefits you get out of the pose
+- Open up 14 of the largest joints in the body. Scapulae, shoulders, elbows, wrists, hips, knees and - ankles
+- This posture is very good for the endocrine system
+
+## STANDING **HEAD TO KNEE** POSE – DANDAYAMANA-JANUSIRASANA
+
+- Put your feet together
+- Shift your weight to your left leg
+- Spread your left toes and get equal amounts of weight distributed throughout the foot
+- Interlace your 10 fingers and pick up your right foot in front of you, at the ball of the foot
+- Hold a nice tight grip, thumbs with the fingers
+- Look in the mirror. From start to finish concentrate on your left knee in the mirror
+- Make sure the leg is straight and engaged from start to finish
+- Your left leg should be strong, solid, one piece, unbroken, every muscle contracted
+- Bring more weight forward towards the toes of your left foot to distribute the weight all over the left foot, equally
+- Don’t bring it to the side
+- Your thigh muscles should be contracted, nice and tight. 
+- Standing leg solid
+- Stomach in, to create more rounding in your back
+- Straight left leg. The whole kneecap lifts up
+- If your standing leg is straight, then inhale breathing, slowly, gently right leg lift up and stretch forward
+- towards the mirror, until the leg is exactly parallel to the floor. 
+- Heel same level as your hip. 
+- Arms straight, chest up
+- Left leg straight
+- Take a deep breath, continuously kick your right leg-heel forward towards the mirror, so you can turn your right foot in from the ankle towards the face, all five toes turning back towards your face
+- Kick your heel forward until both legs are straight
+- Flex your foot, to stretch your Achilles tendon, just above the heel
+- Flex all five toes towards your face
+- If your standing leg is bending, come back to the foundation
+- Solid strong leg, engage all around your knee
+- Kick your heel out, turn your toes in. 
+- Try to get both legs straight, right leg parallel
+- If both legs are straight and you can still balance there, then only, bend your elbows down towards the floor until your elbows touch the calf muscle
+- Don’t let the leg come down, keep kicking the heel forward
+- Kick from your hip all the way through your heel
+- Eventually your elbows should go down below the calf muscles
+- If you can still balance there, with both legs straight, slowly bring your chin to the chest, head down, look
+- at your stomach and touch your forehead to your knee. 
+- Balance there
+- Continuously keep kicking
+- Change, come up reversed way you went in: head up, arms straight, leg down
+- Feet together
+- **-- ADDITIONAL INSTRUCTIONS --**
+- The most important ingredients of this pose are focus, concentration, determination, patience and a very strong straight leg
+- You should feel a tremendous stretch underneath your legs 
