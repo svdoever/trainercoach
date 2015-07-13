@@ -18542,6 +18542,11 @@ define('scripts/StateManager',["require", "exports", "jquery", 'scripts/IndexMan
             this.manager = manager;
             this.state = state;
         }
+        Index.prototype.isIndexStateUninitialised = function () { return this.state === IndexState.Uninitialised; };
+        Index.prototype.isIndexStateWaitForOnline = function () { return this.state === IndexState.WaitForOnline; };
+        Index.prototype.isIndexStateLoading = function () { return this.state === IndexState.Loading; };
+        Index.prototype.isIndexStateAvailable = function () { return this.state === IndexState.Available; };
+        Index.prototype.isIndexStateLoadFailure = function () { return this.state === IndexState.LoadFailure; };
         return Index;
     })();
     var StateManager = (function () {
@@ -18606,6 +18611,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
         ExerciseState[ExerciseState["Setup"] = 0] = "Setup";
         ExerciseState[ExerciseState["TimePoints"] = 1] = "TimePoints";
         ExerciseState[ExerciseState["Teardown"] = 2] = "Teardown";
+        ExerciseState[ExerciseState["List"] = 3] = "List";
     })(ExerciseState || (ExerciseState = {}));
     var ExerciseManager = (function () {
         function ExerciseManager(resourceName, exercisesCollection, rootUri) {
@@ -18639,7 +18645,8 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
         };
         ExerciseManager.prototype.stateChanged = function () {
             if (!!this._stateChanged) {
-                this._stateChanged();
+                console.log("ExerciseManager.stateChanged()");
+                this._stateChanged(this);
             }
         };
         ExerciseManager.prototype.go = function (index) {
@@ -18661,6 +18668,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
                 throw new Error("Exercise " + index + " has no content defined");
             }
             console.log("currentExerciseState: " + this.currentExerciseState);
+            this.stateChanged();
         };
         ExerciseManager.prototype.exerciseTimePointsRestart = function () {
             this.currentExerciseTimePointsInProgress = false;
@@ -18702,6 +18710,16 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
             }
             return this.exercises[this.currentExercise];
         };
+        ExerciseManager.prototype.exerciseIndex = function () {
+            return this.currentExercise;
+        };
+        ExerciseManager.prototype.getExerciseState = function () {
+            return this.currentExerciseState;
+        };
+        ExerciseManager.prototype.setExerciseState = function (state) {
+            this.currentExerciseState = state;
+            this.stateChanged();
+        };
         ExerciseManager.prototype.isExerciseStateSetup = function () {
             return this.currentExerciseState === ExerciseState.Setup;
         };
@@ -18711,14 +18729,24 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
         ExerciseManager.prototype.isExerciseStateTeardown = function () {
             return this.currentExerciseState === ExerciseState.Teardown;
         };
+        ExerciseManager.prototype.isExerciseStateList = function () {
+            return this.currentExerciseState === ExerciseState.List;
+        };
         ExerciseManager.prototype.exerciseStateSetup = function () {
             this.currentExerciseState = ExerciseState.Setup;
+            this.stateChanged();
         };
         ExerciseManager.prototype.exerciseStateTimePoints = function () {
             this.currentExerciseState = ExerciseState.TimePoints;
+            this.stateChanged();
         };
         ExerciseManager.prototype.exerciseStateTeardown = function () {
             this.currentExerciseState = ExerciseState.Teardown;
+            this.stateChanged();
+        };
+        ExerciseManager.prototype.exerciseStateList = function () {
+            this.currentExerciseState = ExerciseState.List;
+            this.stateChanged();
         };
         ExerciseManager.prototype.exerciseTimePointsInProgress = function () {
             this.currentExerciseTimePointsInProgress = true;
@@ -18762,6 +18790,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
             if (this.currentExercise < this.exercises.length - 1) {
                 this.currentExercise++;
                 this.go(this.currentExercise);
+                this.stateChanged();
                 return true;
             }
             else {
@@ -18775,6 +18804,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
             if (this.currentExercise > 0) {
                 this.currentExercise--;
                 this.go(this.currentExercise);
+                this.stateChanged();
                 return true;
             }
             else {
@@ -40652,11 +40682,14 @@ define('scripts/components/Steps',['react'], function(React) {
             //contentDiv.addClass("popupContent");
 
             popupDiv.css({
+                "background-color": "white",
                 "border-width": "6px",
-                "border-color": "rgb(255, 155, 0)"
+                "border-color": "rgb(255, 155, 0)",
+                "border-radius": "6px"
             });
 
             contentDiv.css({
+                "background-color": "white",
                 "color": "black",
                 "font-weight": "bold",
                 "font-size": "24px",
@@ -40708,65 +40741,43 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 
     var Exercises = React.createClass({displayName: "Exercises",
         propTypes: {
-            exerciseManager: React.PropTypes.any.isRequired
+            exerciseManager: React.PropTypes.any.isRequired,
+            stateChanged: React.PropTypes.func.isRequired       // stateChanged function gets ExerciseManager as parameter
         },
         componentWillMount: function () {
-            this.props.exerciseManager.setStateChanged(function () {
-                this.forceUpdate();
-            }.bind(this));
+            this.props.exerciseManager.setStateChanged(this.props.stateChanged);
         },
 
         componentWillUnmount: function () {
             this.props.exerciseManager.setStateChanged(null);
         },
 
-        //componentDidUpdate: function() {
-        //    window.requestAnimationFrame(function() {
-        //        var exerciseManager = this.props.exerciseManager;
-        //        var panelId;
-        //        if (exerciseManager.isExerciseStateSetup()) {
-        //            //$(React.findDOMNode(this.refs.panelSetup)).addClass("active");
-        //            panelId = "#setup";
-        //        //} else {
-        //        //    $(React.findDOMNode(this.refs.panelSetup)).removeClass("active");
-        //        }
-        //        if (exerciseManager.isExerciseStateTimePoints()) {
-        //            panelId = "#timepoints"
-        //            //$(React.findDOMNode(this.refs.panelTimePoints)).addClass("active");
-        //        //} else {
-        //        //    $(React.findDOMNode(this.refs.panelTimePoints)).removeClass("active");
-        //        }
-        //        if (exerciseManager.isExerciseStateTeardown()) {
-        //            panelId = "#teardown";
-        //            //$(React.findDOMNode(this.refs.panelTeardown)).addClass("active");
-        //        //} else {
-        //        //    $(React.findDOMNode(this.refs.panelTeardown)).removeClass("active");
-        //        }
-        //        //$.afui.loadDiv(panelId, /*new view ?*/ false, /*is back click ?*/ false,
-        //        ///*animation*/ "up", panelId /*I believe it is used internally only to find out which view the target belongs to*/)
-        //    }.bind(this));
-        //},
-
         timerDone: function () {
             var exerciseManager = this.props.exerciseManager;
             exerciseManager.exerciseTimePointExecuteDone();
-            this.forceUpdate();
+            this.props.stateChanged(this.props.exerciseManager);
         },
 
         timePointsInProgress: function () {
             var exerciseManager = this.props.exerciseManager;
             exerciseManager.exerciseTimePointsInProgress();
-            this.forceUpdate();
+            this.props.stateChanged(this.props.exerciseManager);
         },
 
         restartTimePoints: function () {
             var exerciseManager = this.props.exerciseManager;
             exerciseManager.exerciseTimePointsRestart();
             exerciseManager.exerciseTimePointsInProgress();
-            this.forceUpdate();
+            this.props.stateChanged(this.props.exerciseManager);
+        },
+
+        onExerciseListClick: function(index, e) {
+            var exerciseManager = this.props.exerciseManager;
+            exerciseManager.go(index);
         },
 
         render: function () {
+            var _this = this;
             var exerciseManager = this.props.exerciseManager;
             var rootUri = exerciseManager.rootUri;
             var currentExercise = exerciseManager.exercise();
@@ -40833,6 +40844,26 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
                 );
             }
 
+            if (exerciseManager.isExerciseStateList()) {
+                var currentExercise = exerciseManager.exerciseIndex();
+
+                return (
+                    React.createElement("div", {className: "panel active"}, 
+                        React.createElement("ul", {key: "exercises_list", className: "list inset stepList"}, 
+                            
+                                exerciseManager.getExercises().map(function(exercise, i) {
+                                    if (i === currentExercise) {
+                                        return React.createElement("li", {className: "stepItem current", key: "ex" + i}, exercise.name.short);
+                                    } else {
+                                        return React.createElement("li", {className: "stepItem", key: "ex" + i, onClick: _this.onExerciseListClick.bind(null, i)}, exercise.name.short);
+                                    }
+                                })
+                            
+                        )
+                    )
+                );
+            }
+
             return (
                 React.createElement("div", {className: "panel active"}, 
                     React.createElement("h1", null, currentExercise.name.short), 
@@ -40844,6 +40875,126 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
     return Exercises;
 });
 //# sourceMappingURL=../components/Exercises.js.map;
+define('scripts/components/ExercisesController',['require','react'],function(require) {
+    var React = require('react');
+
+    var ExercisesController = React.createClass({displayName: "ExercisesController",
+        propTypes: {
+            exerciseManager: React.PropTypes.any.isRequired,
+        },
+
+        componentDidUpdate: function () {
+            window.requestAnimationFrame(function () {
+                $(React.findDOMNode(this.refs.iconPrev)).removeClass("pressed");
+                $(React.findDOMNode(this.refs.iconNext)).removeClass("pressed");
+
+                var exerciseManager = this.props.exerciseManager;
+                if (exerciseManager.isExerciseStateSetup()) {
+                    $(React.findDOMNode(this.refs.iconSetup)).addClass("pressed");
+                } else {
+                    $(React.findDOMNode(this.refs.iconSetup)).removeClass("pressed");
+                }
+                if (exerciseManager.isExerciseStateTimePoints()) {
+                    $(React.findDOMNode(this.refs.iconTimePoints)).addClass("pressed");
+                } else {
+                    $(React.findDOMNode(this.refs.iconTimePoints)).removeClass("pressed");
+                }
+                if (exerciseManager.isExerciseStateTeardown()) {
+                    $(React.findDOMNode(this.refs.iconTeardown)).addClass("pressed");
+                } else {
+                    $(React.findDOMNode(this.refs.iconTeardown)).removeClass("pressed");
+                }
+            }.bind(this));
+        },
+
+        render: function () {
+            var exerciseManager = this.props.exerciseManager;
+            var exercise = exerciseManager.exercise();
+            var classes;
+            var icons = [];
+            if (exerciseManager.isFirst()) {
+                icons.push(React.createElement("a", {key: "i1d", ref: "iconPrev", className: "icon left disabled"}, "Prev"));
+            } else {
+                icons.push(React.createElement("a", {key: "i1e", ref: "iconPrev", className: "icon left", href: "", 
+                              onClick: this.prevClick}, "Prev"));
+            }
+            if (exerciseManager.currentExerciseHasSetupSteps()) {
+                classes = "icon check" + (exerciseManager.isExerciseStateSetup() ? " pressed" : "");
+                icons.push(React.createElement("a", {key: "i2e", ref: "iconSetup", className: classes, href: "#setup", 
+                              onClick: this.setupClick}, "Setup"));
+            } else {
+                icons.push(React.createElement("a", {key: "i2d", ref: "iconSetup", className: "icon check disabled"}, "Setup"));
+            }
+            if (exerciseManager.currentExerciseHasTimePoints()) {
+                classes = "icon clock" + (exerciseManager.isExerciseStateTimePoints() ? " pressed" : "");
+                icons.push(React.createElement("a", {key: "i3e", ref: "iconTimePoints", className: classes, href: "#timepoints", 
+                              onClick: this.timePointsClick}, "Timings"));
+            } else {
+                icons.push(React.createElement("a", {key: "i3d", ref: "iconTimePoints", className: "icon clock disabled"}, "Timings"));
+            }
+            if (exerciseManager.currentExerciseHasTeardownSteps()) {
+                classes = "icon close" + (exerciseManager.isExerciseStateTeardown() ? " pressed" : "");
+                icons.push(React.createElement("a", {key: "i4e", ref: "iconTeardown", className: classes, href: "#teardown", 
+                              onClick: this.teardownClick}, "Teardown"));
+            } else {
+                icons.push(React.createElement("a", {key: "i4d", ref: "iconTeardown", className: "icon close disabled"}, "Teardown"));
+            }
+            if (exerciseManager.isLast()) {
+                icons.push(React.createElement("a", {key: "i5d", ref: "iconNext", className: "icon right disabled"}, "Next"));
+            } else {
+                icons.push(React.createElement("a", {key: "i5e", ref: "iconNext", className: "icon right", href: "", 
+                              onClick: this.nextClick}, "Next"));
+            }
+
+            if (exerciseManager.isExerciseStateList()) {
+                icons.push(React.createElement("a", {key: "i6active", ref: "iconList", className: "icon stack pressed", href: "", 
+                              onClick: this.listHideClick}, "List"));
+            } else {
+                icons.push(React.createElement("a", {key: "i6inactive", ref: "iconList", className: "icon stack", href: "", 
+                              onClick: this.listShowClick}, "List"));
+            }
+
+            return (
+                React.createElement("footer", null, 
+                    icons
+                )
+            )
+        },
+
+        setupClick: function (e) {
+            this.props.exerciseManager.exerciseStateSetup();
+        },
+
+        timePointsClick: function (e) {
+            this.props.exerciseManager.exerciseStateTimePoints();
+        },
+
+        teardownClick: function (e) {
+
+            this.props.exerciseManager.exerciseStateTeardown();
+        },
+
+        listHideClick: function (e) {
+            this.props.exerciseManager.setExerciseState(this.state.savedExerciseState); // restore state
+        },
+
+        listShowClick: function (e) {
+            this.setState({ savedExerciseState: this.props.exerciseManager.getExerciseState() });
+            this.props.exerciseManager.exerciseStateList();
+        },
+
+        prevClick: function (exerciseManager, e) {
+            this.props.exerciseManager.prevExercise();
+        },
+
+        nextClick: function (exerciseManager, e) {
+            this.props.exerciseManager.nextExercise();
+        }
+    });
+
+    return ExercisesController;
+});
+//# sourceMappingURL=../components/ExercisesController.js.map;
 define('scripts/components/Index',['require','react'],function(require) {
     var React = require('react');
 
@@ -40917,10 +41068,10 @@ define('scripts/components/Menu',['require','react','scripts/components/Index'],
                 React.createElement("div", null, 
                     
                         indices.map(function (index, i) {
-                            if (index.state === 3) {
+                            if (index.isIndexStateAvailable()) {
                                 return (
                                     React.createElement("div", {key: "menuindex" + i}, 
-                                        React.createElement("h1", null, index.title), 
+                                        React.createElement("div", {className: "menuIndexTitle"}, index.title), 
                                         React.createElement(Index, {indexManager: index.manager, handle: _this.props.handle})
                                     )
                                 )
@@ -40942,6 +41093,7 @@ require(['jquery', 'appframework', 'fastclick',
         'scripts/StateManager', 'scripts/IndexManager', 'scripts/ExerciseManager',
         'scripts/components/CircularTimer',
         'scripts/components/Exercises',
+        'scripts/components/ExercisesController',
         'scripts/components/Index',
         'scripts/components/Menu',
         'react'],
@@ -40949,6 +41101,7 @@ require(['jquery', 'appframework', 'fastclick',
                   StateManager, IndexManager, ExerciseManager,
                   CircularTimer,
                   Exercises,
+                  ExercisesController,
                   Index,
                   Menu,
                   React) {
@@ -41002,125 +41155,7 @@ require(['jquery', 'appframework', 'fastclick',
             }
         });
 
-
-
-
-
-        var ExercisesController = React.createClass({displayName: "ExercisesController",
-            propTypes: {
-                exerciseManager: React.PropTypes.any.isRequired
-            },
-
-            componentDidUpdate: function() {
-                window.requestAnimationFrame(function() {
-                    $(React.findDOMNode(this.refs.iconPrev)).removeClass("pressed");
-                    $(React.findDOMNode(this.refs.iconNext)).removeClass("pressed");
-
-                    var exerciseManager = this.props.exerciseManager;
-                    if (exerciseManager.isExerciseStateSetup()) {
-                        $(React.findDOMNode(this.refs.iconSetup)).addClass("pressed");
-                    } else {
-                        $(React.findDOMNode(this.refs.iconSetup)).removeClass("pressed");
-                    }
-                    if (exerciseManager.isExerciseStateTimePoints()) {
-                        $(React.findDOMNode(this.refs.iconTimePoints)).addClass("pressed");
-                    } else {
-                        $(React.findDOMNode(this.refs.iconTimePoints)).removeClass("pressed");
-                    }
-                    if (exerciseManager.isExerciseStateTeardown()) {
-                        $(React.findDOMNode(this.refs.iconTeardown)).addClass("pressed");
-                    } else {
-                        $(React.findDOMNode(this.refs.iconTeardown)).removeClass("pressed");
-                    }
-                }.bind(this));
-            },
-
-            render: function() {
-                var exerciseManager = this.props.exerciseManager;
-                var exercise = exerciseManager.exercise();
-                var classes;
-                var icons = [];
-                if (exerciseManager.isFirst()) {
-                    icons.push(React.createElement("a", {key: "i1d", ref: "iconPrev", className: "icon left disabled"}, "Prev"));
-                } else {
-                    icons.push(React.createElement("a", {key: "i1e", ref: "iconPrev", className: "icon left", href: "", 
-                                  onClick: this.prevClick.bind(this, exerciseManager)}, "Prev"));
-                }
-                if (exerciseManager.currentExerciseHasSetupSteps()) {
-                    classes = "icon check" + (exerciseManager.isExerciseStateSetup()? " pressed" : "");
-                    icons.push(React.createElement("a", {key: "i2e", ref: "iconSetup", className: classes, href: "#setup", 
-                                  onClick: this.setupClick}, "Setup"));
-                } else {
-                    icons.push(React.createElement("a", {key: "i2d", ref: "iconSetup", className: "icon check disabled"}, "Setup"));
-                }
-                if (exerciseManager.currentExerciseHasTimePoints()) {
-                    classes = "icon clock" + (exerciseManager.isExerciseStateTimePoints()? " pressed" : "");
-                    icons.push(React.createElement("a", {key: "i3e", ref: "iconTimePoints", className: classes, href: "#timepoints", 
-                                  onClick: this.timePointsClick}, "Timings"));
-                } else {
-                    icons.push(React.createElement("a", {key: "i3d", ref: "iconTimePoints", className: "icon clock disabled"}, "Timings"));
-                }
-                if (exerciseManager.currentExerciseHasTeardownSteps()) {
-                    classes = "icon close" + (exerciseManager.isExerciseStateTeardown()? " pressed" : "");
-                    icons.push(React.createElement("a", {key: "i4e", ref: "iconTeardown", className: classes, href: "#teardown", 
-                                  onClick: this.teardownClick}, "Teardown"));
-                } else {
-                    icons.push(React.createElement("a", {key: "i4d", ref: "iconTeardown", className: "icon close disabled"}, "Teardown"));
-                }
-                if (exerciseManager.isLast()) {
-                    icons.push(React.createElement("a", {key: "i5d", ref: "iconNext", className: "icon right disabled"}, "Next"));
-                } else {
-                    icons.push(React.createElement("a", {key: "i5e", ref: "iconNext", className: "icon right", href: "", 
-                                  onClick: this.nextClick.bind(this, exerciseManager)}, "Next"));
-                }
-
-                return(
-                    React.createElement("footer", null, 
-                        icons
-                    )
-                )
-            },
-
-            setupClick: function(e) {
-                reactPreventPropagation(e);
-
-                var exerciseManager = this.props.exerciseManager;
-                exerciseManager.exerciseStateSetup();
-                exerciseManager.stateChanged();
-            },
-
-            timePointsClick: function(e) {
-                reactPreventPropagation(e);
-
-                var exerciseManager = this.props.exerciseManager;
-                exerciseManager.exerciseStateTimePoints();
-                exerciseManager.stateChanged();
-            },
-
-            teardownClick: function(e) {
-                reactPreventPropagation(e);
-
-                var exerciseManager = this.props.exerciseManager;
-                exerciseManager.exerciseStateTeardown();
-                exerciseManager.stateChanged();
-            },
-
-            prevClick: function (exerciseManager, e) {
-                reactPreventPropagation(e);
-
-                exerciseManager.prevExercise();
-                renderExercise(exerciseManager, e);
-            },
-
-            nextClick: function (exerciseManager, e) {
-                reactPreventPropagation(e);
-
-                exerciseManager.nextExercise();
-                renderExercise(exerciseManager);
-            }
-        });
-
-         var Indices = React.createClass({displayName: "Indices",
+        var Indices = React.createClass({displayName: "Indices",
             propTypes: {
                 indices: React.PropTypes.any.isRequired
             },
@@ -41160,7 +41195,7 @@ require(['jquery', 'appframework', 'fastclick',
 
         function renderExercise(exerciseManager) {
             React.render(React.createElement(ExercisesHeader, {key: "exerciseHeader", exerciseManager: exerciseManager}), document.getElementById('mountAppHeader'));
-            React.render(React.createElement(Exercises, {key: "exercises", exerciseManager: exerciseManager}), document.getElementById('mountExercisesViewer'));
+            React.render(React.createElement(Exercises, {key: "exercises", exerciseManager: exerciseManager, stateChanged: renderExercise}), document.getElementById('mountExercisesViewer'));
             React.render(React.createElement(ExercisesController, {key: "exercisesController", exerciseManager: exerciseManager}), document.getElementById('mountExercisesController'));
         }
 

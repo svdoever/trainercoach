@@ -7180,6 +7180,10 @@ body {
   color: white;
   text-align: center;
   border-radius: 6px; }
+.menuIndexTitle {
+  margin: 10px;
+  font-size: 18px;
+  font-weight: bolder; }
 .indexItem {
   font-size: 18px;
   font-weight: bold; }
@@ -7193,6 +7197,9 @@ body {
 .stepItem {
   font-size: 18px;
   font-weight: bold; }
+.stepItem.current {
+  background-color: #ff9b00;
+  color: white; }
 .icon.disabled {
   opacity: 0.2;
   cursor: not-allowed; }
