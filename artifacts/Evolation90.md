@@ -1,6 +1,6 @@
-# Evolation Yoga 90 (minutes:90)
+# Evolation 90
 
-## WELCOME (seconds:65)
+## WELCOME
 
 - Good morning
 - We **begin** our practice today with **stillness**

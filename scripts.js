@@ -18638,6 +18638,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
                 }
                 this.exercises.push({ name: name, setupSteps: setupSteps, timePoints: timePoints, teardownSteps: teardownSteps });
             }
+            this.duration = 90;
             this.go(0);
         }
         ExerciseManager.prototype.setStateChanged = function (stateChanged) {
@@ -18700,6 +18701,31 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
         };
         ExerciseManager.prototype.count = function () {
             return !!this.exercises ? this.exercises.length : 0;
+        };
+        ExerciseManager.prototype.isStarted = function () {
+            return this.started;
+        };
+        ExerciseManager.prototype.start = function () {
+            this.started = true;
+            this.startTime = new Date();
+            this.stateChanged();
+        };
+        ExerciseManager.prototype.getDuration = function () {
+            return this.duration;
+        };
+        ExerciseManager.prototype.getStartTime = function () {
+            return this.startTime;
+        };
+        ExerciseManager.prototype.getElapsedTimeInMinutes = function () {
+            if (!this.started) {
+                return 0;
+            }
+            var minutes = Math.floor(((new Date()).getTime() - this.startTime.getTime()) / 60000);
+            return minutes;
+        };
+        ExerciseManager.prototype.getOverdueTimeInMinutes = function () {
+            var minutesOverdue = this.getElapsedTimeInMinutes() - this.duration;
+            return minutesOverdue < 0 ? 0 : minutesOverdue;
         };
         ExerciseManager.prototype.exercise = function () {
             if (!this.exercises) {
@@ -40776,6 +40802,10 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
             exerciseManager.go(index);
         },
 
+        onStartClick: function() {
+            this.props.exerciseManager.start();
+        },
+
         render: function () {
             var _this = this;
             var exerciseManager = this.props.exerciseManager;
@@ -40791,7 +40821,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
                             React.createElement("h1", null, "COMPLETED")
                         ), 
                         React.createElement("div", null, 
-                            React.createElement("a", {href: "", onClick: this.restartTimePoints}, 
+                            React.createElement("a", {href: "", onClick: this.onStartClick}, 
                                 React.createElement("h1", null, "RESTART")
                             )
                         )
@@ -40810,17 +40840,16 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
                                                    onComplete: this.timerDone});
             }
 
-            if (exerciseManager.isExerciseStateSetup()) {
-                var progressStyle = {
-                    width: "100%",
-                    color: "red"
-                };
+            if (!exerciseManager.isStarted()) {
+                return (
+                    React.createElement("a", {href: "", onClick: this.onStartClick}, "START")
+                );
+            }
 
+            if (exerciseManager.isExerciseStateSetup()) {
                 return (
                     React.createElement("div", {className: "panel active"}, 
                         React.createElement("h1", null, currentExercise.name.short), 
-                        React.createElement("progress", {max: "100", value: "80", className: "progressExercise"}
-                        ), 
                         React.createElement(Steps, {id: "setup", items: currentExercise.setupSteps, rootUri: rootUri})
                     )
                 );
@@ -40849,6 +40878,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 
                 return (
                     React.createElement("div", {className: "panel active"}, 
+                        React.createElement("h1", null, "ALL (SELECT ONE)"), 
                         React.createElement("ul", {key: "exercises_list", className: "list inset stepList"}, 
                             
                                 exerciseManager.getExercises().map(function(exercise, i) {
@@ -40875,6 +40905,77 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
     return Exercises;
 });
 //# sourceMappingURL=../components/Exercises.js.map;
+define('scripts/components/ExercisesHeader',['require','react'],function(require) {
+    var React = require('react');
+
+    var ExercisesHeader = React.createClass({displayName: "ExercisesHeader",
+        timeoutId: undefined,
+
+        propTypes: {
+            exerciseManager: React.PropTypes.any.isRequired
+        },
+
+        componentDidMount: function() {
+            this.tick();
+        },
+
+        componentWillUnmount: function() {
+            if (this.timeoutId) {
+                clearTimeout(this.timeoutId);
+                this.timeoutId = undefined;
+            }
+        },
+
+        tick: function() {
+            if(!this.isMounted()) {
+                return;
+            }
+
+            this.timeoutId = setTimeout(this.tick, 5000);
+            this.forceUpdate();  // redraw
+        },
+
+        render: function () {
+            var exerciseManager = this.props.exerciseManager;
+            var rootUri = exerciseManager.rootUri;
+
+            // top menu bar has height of 44px, place timer in upperleft corner
+            var overdueTime = exerciseManager.getOverdueTimeInMinutes();
+            var positionTimerStyle = {
+                margin: ['10px', 0],
+                paddingLeft: '6px',
+                paddingRight: '6px',
+                borderRadius: '6px',
+                backgroundColor: overdueTime === 0? 'green' : 'red',
+                color: 'white',
+                fontSize: '18px',
+                fontWeight: 'bold',
+                position: 'absolute',
+                left: '10px',
+                top: '10px',
+            };
+
+            var timeDisplay, overdueTimeDisplay;
+
+            if (overdueTime === 0) {
+                timeDisplay = React.createElement("span", null, React.createElement("span", null, exerciseManager.getElapsedTimeInMinutes()), "′");
+            } else {
+                timeDisplay = React.createElement("span", null, React.createElement("span", null, exerciseManager.getDuration()), "′");
+                overdueTimeDisplay = React.createElement("span", null, " +", React.createElement("span", null, overdueTime), "′");
+            }
+            return (
+                React.createElement("span", null, 
+                    React.createElement("span", {style: positionTimerStyle}, timeDisplay, overdueTimeDisplay), 
+                    React.createElement("h1", null, exerciseManager.title.short)
+                )
+            );
+        }
+    });
+
+    return ExercisesHeader;
+});
+
+//# sourceMappingURL=../components/ExercisesHeader.js.map;
 define('scripts/components/ExercisesController',['require','react'],function(require) {
     var React = require('react');
 
@@ -40961,33 +41062,45 @@ define('scripts/components/ExercisesController',['require','react'],function(req
             )
         },
 
+        reactPreventPropagation: function(e) {
+            // We don't want the event to propagate to App Framework/JQuery
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+        },
+
         setupClick: function (e) {
+            this.reactPreventPropagation(e);
             this.props.exerciseManager.exerciseStateSetup();
         },
 
         timePointsClick: function (e) {
+            this.reactPreventPropagation(e);
             this.props.exerciseManager.exerciseStateTimePoints();
         },
 
         teardownClick: function (e) {
-
+            this.reactPreventPropagation(e);
             this.props.exerciseManager.exerciseStateTeardown();
         },
 
         listHideClick: function (e) {
+            this.reactPreventPropagation(e);
             this.props.exerciseManager.setExerciseState(this.state.savedExerciseState); // restore state
         },
 
         listShowClick: function (e) {
+            this.reactPreventPropagation(e);
             this.setState({ savedExerciseState: this.props.exerciseManager.getExerciseState() });
             this.props.exerciseManager.exerciseStateList();
         },
 
-        prevClick: function (exerciseManager, e) {
+        prevClick: function (e) {
+            this.reactPreventPropagation(e);
             this.props.exerciseManager.prevExercise();
         },
 
-        nextClick: function (exerciseManager, e) {
+        nextClick: function (e) {
+            this.reactPreventPropagation(e);
             this.props.exerciseManager.nextExercise();
         }
     });
@@ -41093,6 +41206,7 @@ require(['jquery', 'appframework', 'fastclick',
         'scripts/StateManager', 'scripts/IndexManager', 'scripts/ExerciseManager',
         'scripts/components/CircularTimer',
         'scripts/components/Exercises',
+        'scripts/components/ExercisesHeader',
         'scripts/components/ExercisesController',
         'scripts/components/Index',
         'scripts/components/Menu',
@@ -41101,6 +41215,7 @@ require(['jquery', 'appframework', 'fastclick',
                   StateManager, IndexManager, ExerciseManager,
                   CircularTimer,
                   Exercises,
+                  ExercisesHeader,
                   ExercisesController,
                   Index,
                   Menu,
@@ -41114,72 +41229,6 @@ require(['jquery', 'appframework', 'fastclick',
 
         $.afui.launch();
 
-        var reactPreventPropagation = function(e) {
-            // We don't want to the event to propagate to App Framework/JQuery
-            e.stopPropagation();
-            e.nativeEvent.stopImmediatePropagation();
-        }
-
-        var ExercisesHeader = React.createClass({displayName: "ExercisesHeader",
-            propTypes: {
-                exerciseManager: React.PropTypes.any.isRequired
-            },
-
-            timerExpired: function() {
-            },
-
-            render: function () {
-                var exerciseManager = this.props.exerciseManager;
-                var rootUri = exerciseManager.rootUri;
-
-                // top menu bar has height of 44px, place CircularTimer with size 36
-                var positionCircularTimerStyle = {
-                    position: 'absolute',
-                    top: '4px',
-                    left: '4px',
-                };
-
-                return (
-                    React.createElement("span", null, 
-                        React.createElement("span", {style: positionCircularTimerStyle}, 
-                            React.createElement(CircularTimer, {seconds: 1000, 
-                                           size: 36, 
-                                           color: "#FF9B00", 
-                                           up: true, 
-                                           doneText: "OK", 
-                                           onComplete: this.timerExpired})
-                        ), 
-                        React.createElement("h1", null, exerciseManager.title.short)
-                    )
-                );
-            }
-        });
-
-        var Indices = React.createClass({displayName: "Indices",
-            propTypes: {
-                indices: React.PropTypes.any.isRequired
-            },
-
-            render: function() {
-                return (
-                    React.createElement("h1", null, "INDICES")
-                );
-            }
-        });
-
-        //function renderIndex(source) {
-        //    var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
-        //    $.get(source + "?v=" + Math.random().toString(), function (indexMarkdown) {
-        //        $.afui.hideMask();
-        //        var indexManager =  new IndexManager(source, indexMarkdown, this.rootUri);
-        //        React.render(<Index key="index" indexManager={indexManager}/>, document.getElementById('mountIndexLeftMenu'));
-        //    }.bind(context));
-        //    //var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
-        //    //var indexMarkdown = '# Menu\n\n- [Bikram 90](Bikram90.md)';
-        //    //var indexManager =  new IndexManager(source, indexMarkdown, this.rootUri);
-        //    //React.render(<Index key="index" indexManager={indexManager}/>, document.getElementById('mountIndexLeftMenu'));
-        //}
-
         function renderExercises(source) {
             var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
             $.get(source + "?v=" + Math.random().toString(), function (exercisesMarkdown) {
@@ -41187,10 +41236,6 @@ require(['jquery', 'appframework', 'fastclick',
                 var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
                 renderExercise(exerciseManager);
             }.bind(context));
-            //var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
-            //var exercisesMarkdown = '# Evolation Yoga 90\n\n## WELCOME\n\n- Good morning!! \n- We **begin** our practice today with **stillness**\n- Please come to **seated** position with your legs crossed and **spine straight**\n- **Sit in lotus** if you are able\n- **Focus** your **eyes one point** in the mirror and bring your awareness to your breath\n- Set your **intention** for your **practice** today\n- **Be here, present**, for the next 90 minutes\n- **-- ADDITIONAL INSTRUCTIONS --** FOR THE BEGINNING OF CLASS. CHOOSE ONE OR TWO:\n- If at any time in the class you are **nauseous or light headed**, sit down and focus on your breath, eyes focused on one point. Find your balance and rejoin the class when you are ready. As a beginner take care of yourself, try to stay in the room\n- This is a **moving meditation**\n- Low **slow flow** with your **breath**\n- This class is primarily a **listening and breathing** exercise\n- Use **continuous energy**, in correct form, while paying attention to your breathing in every posture\n- Be completely **still in-between** the **postures**\n- Most importantly we **balance** conscious breathing with body awareness and focused eyes\n- **No bouncing** in and out of the pose\n- **Find stillness** at the end of the pose in your maximum expression\n- Whether you do 1% depth, or 99% depth, you get **100% benefit**. As long as you try the right way and you stay focused and don’t give up\n- Before you even start, **make up your mind** to just keep going\n- The **postures** are not the goal. They are a tool to create **connection** between **body** and **mind**\n- **Have faith**. Believe in yourself, your spirit, your mind, your goals\n- **Mind** control **and self control**, know when and how to use it\n- Use **determination and willpower**. Go until you reach results and then keep going\n- **Concentration = meditation** = achieving your goals\n- Create **Maximum energy and stillness** at the same time\n- **Be present**, inclusive, responsible and authentic. Practice your Yoga\n\n## STANDING **DEEP BREATHING** – PRANAYAMA\n\n- Please stand up and **focus** in the **mirror**\n- We start with the **breathing exercise**, Pranayama Deep Breathing\n- Please **listen carefully**\n- **Inhale** by the **nose** and **exhale** by the **mouth**\n- Inhales and exhales should be controlled with the **muscles** in the **throat**\n- **Breathe** as much as possible, as **long** as possible, as **slow** as possible, as **deep** as possible\n- [As a **beginner**, **first watch** a few breaths and join in once you understand]\n- Put your **feet together**, toes and heels touching each other\n- All ten **fingers interlaced** under the chin, full webbing to webbing grip\n- Touch your **knuckles** to the **chin**, **thumbs** touching the **throat**\n- Nice **relaxed shoulders**\n- Once the first breath starts, **elbows never drop** below shoulder height\n- **Swallow** a couple of times\n- **Look** in the **mirror**\n- **Concentrate. Meditate**\n\n---\n\n- [Begin, inhale](6:beep)\n- [Exhale](6:beep)\n- [Inhale nose, full longs](6:beep)\n- [Exhale mouth, loud ahhh, empty lungs](6:beep)\n- [Inhale stretch elbows wide and up, eyes mirror](6:beep)\n- [Exhale, head back, knocles against chin](6:beep)\n- [Inhale](6:beep)\n- [Exhale](6:beep)\n\n\n## Exercise 2\n\n- do this\n- do that\n- do such\n- do so\n\n---\n\n- [breath in deep](6:beep)\n- [breath out slow](6:beep)\n- [breath in](6:beep)\n- [breath out](6:beep)\n- [breath in deep](6:beep)\n- [breath out slow](6:beep)\n- [breath in](6:beep)\n- [breath out](6:beep)\n\n---\n\n- do this\n- do that\n- do such\n- do so\n\n## Exercise 2\n- and now 1\n- and now 2\n- and now 3\n- and now 4\n- and now 5\n\n## Exercise 3\n- this is one\n- this is two\n- this is three\n- this is four\n- this is five';
-            //var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
-            //renderExercise(exerciseManager);
         }
 
         function renderExercise(exerciseManager) {
@@ -41207,9 +41252,6 @@ require(['jquery', 'appframework', 'fastclick',
         }
 
         var state = new StateManager("TrainerCoach", renderApp);
-
-        //renderIndex("https://raw.githack.com/wiki/svdoever/trainercoach/indexhotyoga.md");
-        //renderIndex("artifacts/index.md");
     });
 });
 //# sourceMappingURL=app.js.map;
