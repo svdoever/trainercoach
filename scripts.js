@@ -40878,7 +40878,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 
                 return (
                     React.createElement("div", {className: "panel active"}, 
-                        React.createElement("h1", null, "ALL (SELECT ONE)"), 
+                        React.createElement("h1", null, "All (select one)"), 
                         React.createElement("ul", {key: "exercises_list", className: "list inset stepList"}, 
                             
                                 exerciseManager.getExercises().map(function(exercise, i) {
@@ -41014,7 +41014,8 @@ define('scripts/components/ExercisesController',['require','react'],function(req
             var classes;
             var icons = [];
             if (exerciseManager.isFirst()) {
-                icons.push(React.createElement("a", {key: "i1d", ref: "iconPrev", className: "icon left disabled"}, "Prev"));
+                icons.push(React.createElement("a", {key: "i1d", ref: "iconPrev", className: "icon left disabled", 
+                              onClick: this.ignoreClick}, "Prev"));
             } else {
                 icons.push(React.createElement("a", {key: "i1e", ref: "iconPrev", className: "icon left", href: "", 
                               onClick: this.prevClick}, "Prev"));
@@ -41024,24 +41025,28 @@ define('scripts/components/ExercisesController',['require','react'],function(req
                 icons.push(React.createElement("a", {key: "i2e", ref: "iconSetup", className: classes, href: "#setup", 
                               onClick: this.setupClick}, "Setup"));
             } else {
-                icons.push(React.createElement("a", {key: "i2d", ref: "iconSetup", className: "icon check disabled"}, "Setup"));
+                icons.push(React.createElement("a", {key: "i2d", ref: "iconSetup", className: "icon check disabled", 
+                              onClick: this.ignoreClick}, "Setup"));
             }
             if (exerciseManager.currentExerciseHasTimePoints()) {
                 classes = "icon clock" + (exerciseManager.isExerciseStateTimePoints() ? " pressed" : "");
                 icons.push(React.createElement("a", {key: "i3e", ref: "iconTimePoints", className: classes, href: "#timepoints", 
                               onClick: this.timePointsClick}, "Timings"));
             } else {
-                icons.push(React.createElement("a", {key: "i3d", ref: "iconTimePoints", className: "icon clock disabled"}, "Timings"));
+                icons.push(React.createElement("a", {key: "i3d", ref: "iconTimePoints", className: "icon clock disabled", 
+                              onClick: this.ignoreClick}, "Timings"));
             }
             if (exerciseManager.currentExerciseHasTeardownSteps()) {
                 classes = "icon close" + (exerciseManager.isExerciseStateTeardown() ? " pressed" : "");
                 icons.push(React.createElement("a", {key: "i4e", ref: "iconTeardown", className: classes, href: "#teardown", 
                               onClick: this.teardownClick}, "Teardown"));
             } else {
-                icons.push(React.createElement("a", {key: "i4d", ref: "iconTeardown", className: "icon close disabled"}, "Teardown"));
+                icons.push(React.createElement("a", {key: "i4d", ref: "iconTeardown", className: "icon close disabled", 
+                              onClick: this.ignoreClick}, "Teardown"));
             }
             if (exerciseManager.isLast()) {
-                icons.push(React.createElement("a", {key: "i5d", ref: "iconNext", className: "icon right disabled"}, "Next"));
+                icons.push(React.createElement("a", {key: "i5d", ref: "iconNext", className: "icon right disabled", 
+                              onClick: this.ignoreClick}, "Next"));
             } else {
                 icons.push(React.createElement("a", {key: "i5e", ref: "iconNext", className: "icon right", href: "", 
                               onClick: this.nextClick}, "Next"));
@@ -41066,6 +41071,11 @@ define('scripts/components/ExercisesController',['require','react'],function(req
             // We don't want the event to propagate to App Framework/JQuery
             e.stopPropagation();
             e.nativeEvent.stopImmediatePropagation();
+            this.forceUpdate(); // make sure the correct icon is rendered
+        },
+
+        ignoreClick: function(e) {
+            this.reactPreventPropagation(e);
         },
 
         setupClick: function (e) {
@@ -41157,7 +41167,7 @@ define('scripts/components/Index',['require','react'],function(require) {
                 return (React.createElement(IndexEntry, {key: i, title: link.title.short, link: fullLink, handle: _this.props.handle}));
             });
 
-            return (React.createElement("ul", {className: "list inset"}, training));
+            return (React.createElement("ul", {className: "list inset stepList"}, training));
         }
     });
 
@@ -41177,8 +41187,12 @@ define('scripts/components/Menu',['require','react','scripts/components/Index'],
         render: function () {
             var _this = this;
             var indices = this.props.indices;
+            var scrollStyle = {
+                overflowY: "scroll"
+            };
+
             return (
-                React.createElement("div", null, 
+                React.createElement("div", {style: scrollStyle}, 
                     
                         indices.map(function (index, i) {
                             if (index.isIndexStateAvailable()) {
@@ -41227,6 +41241,9 @@ require(['jquery', 'appframework', 'fastclick',
         $.afui.enableTabBar();
         FastClick.attach(document.body);
 
+
+        $.feat.nativeTouchScroll=true;
+
         $.afui.launch();
 
         function renderExercises(source) {
@@ -41234,6 +41251,8 @@ require(['jquery', 'appframework', 'fastclick',
             $.get(source + "?v=" + Math.random().toString(), function (exercisesMarkdown) {
                 $.afui.hideMask();
                 var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
+                // For now: autostart
+                exerciseManager.start();
                 renderExercise(exerciseManager);
             }.bind(context));
         }

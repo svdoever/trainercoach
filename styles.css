@@ -7223,3 +7223,6 @@ body {
   font-size: 24px;
   text-align: center;
   border: 0px; }
+* {
+  -ms-touch-action: auto;
+  -ms-overflow-style: auto; }
