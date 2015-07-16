@@ -18372,7 +18372,9 @@ define('scripts/CommonMarkDsl',["require", "exports", "commonmark"], function (r
                 this.error(itemIterator, "Expected at least one item in the list");
             while (!!itemIterator) {
                 var paragraph = itemIterator.firstChild;
-                if (!paragraph || paragraph.type !== CommonMarkNodeType.Paragraph)
+                if (!paragraph)
+                    this.error(itemIterator, "Expected for list item " + listItemIndex + " a non-empty list item with a paragraph");
+                if (paragraph.type !== CommonMarkNodeType.Paragraph)
                     this.error(paragraph, "Expected for list item " + listItemIndex + " a non-empty list item with a paragraph");
                 var textNode = paragraph.firstChild;
                 if (!textNode)
@@ -18382,6 +18384,7 @@ define('scripts/CommonMarkDsl',["require", "exports", "commonmark"], function (r
                     this.error(textNode, "Expected for list item " + listItemIndex + " a non-empty text");
                 items.push(text);
                 itemIterator = itemIterator.next;
+                listItemIndex++;
             }
             this.current = this.current.next;
             return items;
