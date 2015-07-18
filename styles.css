@@ -7206,6 +7206,9 @@ body {
 .stepItem.current {
   background-color: #ff9b00;
   color: white; }
+.stepItem.selected {
+  background-color: #ff9b00;
+  color: white; }
 .icon.disabled {
   opacity: 0.2;
   cursor: not-allowed; }

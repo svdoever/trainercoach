@@ -40657,6 +40657,18 @@ define('scripts/components/Steps',['react'], function(React) {
             rootUri:  React.PropTypes.string.isRequired
         },
 
+        getInitialState: function() {
+            return {
+                selectedItem: undefined
+            };
+        },
+
+        componentWillReceiveProps: function(nextProps) {
+            this.setState({
+                selectedItem: undefined
+            });
+        },
+
         render: function () {
             var _this = this;
             var stepsId = "steps_" + this.props.id;
@@ -40666,12 +40678,13 @@ define('scripts/components/Steps',['react'], function(React) {
                         this.props.items.map(function(item, i) {
                             var text = item.short;
                             if (text.length > 4 && text.substring(0,2) === "--" && text.indexOf("--", text.length - 2) !== -1) {
-                                // text in format -- blabla --, now remove -- at beginning and end and trim
+                                // text in format -- blabla --, now remove -- at begin and end and trim
                                 text = text.substring(2, text.length - 2).trim();
                                 return React.createElement("li", {className: "stepItem divider", key: stepsId + i}, text);
                             } else {
-                                return React.createElement("li", {className: "stepItem", key: stepsId + i, 
-                                           onClick: _this.onClick.bind(null, item)}, text);
+                                var classes = _this.state.selectedItem === item? "stepItem selected" : "stepItem";
+                                return React.createElement("li", {className: classes, key: stepsId + i, 
+                                           onClick: _this.onClick.bind(_this, item)}, _this.state.selectedItem === item? item.text : item.short);
                             }
                         })
                     
@@ -40680,64 +40693,8 @@ define('scripts/components/Steps',['react'], function(React) {
         },
 
         onClick: function(item, e) {
-            reactPreventPropagation(e);
-
-            var popup = $.afui.popup( {
-                suppressTitle: true,
-                message:item.text,
-                cancelText:"OK",
-                cancelOnly:true,
-                cancelClass: "hidden"
-            });
-
-            // resize to 80% height, 80% width
-            var perc = 80;
-            var top = Math.round(window.pageYOffset + window.innerHeight * (1 - perc/100) / 2);
-            var left = Math.round(window.pageXOffset + window.innerWidth * (1 - perc/100) / 2);
-            var height = Math.round(window.innerHeight * perc/100);
-            var width = Math.round(window.innerWidth * perc/100);
-            var popupDiv = $("#"+popup.id);
-            var contentDiv = popupDiv.find("div");
-
-            popupDiv.find("header").remove();
-            popupDiv.find("footer").remove();
-
-            /*
-             popupDiv.css({
-             "top": top + "px !important",
-             "left": left + "px !important",
-             "width": width + "px !important",
-             "height": height + "px !important",
-             "background-color": "yellow",
-             "border": "10px"
-             });
-             */
-
-            //Should be set to these lines instead of setting CSS styles, but does not work
-            //popupDiv.addClass("popupOuter");
-            //contentDiv.addClass("popupContent");
-
-            popupDiv.css({
-                "background-color": "white",
-                "border-width": "6px",
-                "border-color": "rgb(255, 155, 0)",
-                "border-radius": "6px"
-            });
-
-            contentDiv.css({
-                "background-color": "white",
-                "color": "black",
-                "font-weight": "bold",
-                "font-size": "24px",
-                "text-align": "center",
-                "border": "0px"
-            });
-
-
-            popupDiv.on("click", function() { popup.hide(); });
-            // Also on click outside popup, on element with id "mask", hide popup
-            $("#mask").on("click", function() { popup.hide(); });
-        }
+            this.setState({selectedItem: this.state.selectedItem === item? undefined: item});
+        },
     });
     return Steps;
 });
