@@ -7200,6 +7200,8 @@ body {
   font-size: 18px;
   font-weight: bold; }
 .stepItem.divider {
+  padding-left: 0px;
+  padding-right: 0px;
   font-size: 18px !important;
   font-weight: bold !important;
   text-align: center; }
@@ -7214,10 +7216,19 @@ body {
   cursor: not-allowed; }
 .view footer > a.disabled.pressed:not(.button) {
   background-color: inherit; }
+.timercontainer {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  x-justify-content: space-around;
+  x-align-items: stretch;
+  max-width: 100%; }
 .timer {
+  width: 110px;
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px; }
+  -webkit-flex: 0 0 110px;
+      -ms-flex: 0 0 110px;
+          flex: 0 0 110px; }
 .progressTraining {
   width: 100%; }
 .progressExercise {

@@ -2,12 +2,15 @@
 
 ## ABOUT
 
+### SETUP
 - Evolation hot yoga 90 minutes asana essentials
 - This material is used as personal test material in developing the Trainer-Coach app, and is made available for the Evolation teacher training that is currently running in Amsterdam to help the trainees study the Evolation yoga asanas
 - This material is copyright 2015, Evolation
 - Namaste
 
 ## WELCOME
+
+### SETUP
 
 - Good morning
 - We **begin** our practice today with **stillness**
@@ -38,6 +41,8 @@
 
 ## STANDING **DEEP BREATHING** – PRANAYAMA
 
+### SETUP
+
 - Please stand up and **focus** in the **mirror**
 - We start with the **breathing exercise**, Pranayama Deep Breathing
 - Please **listen carefully**
@@ -54,7 +59,7 @@
 - **Look** in the **mirror**
 - **Concentrate. Meditate**
 
----
+### TIMEPOINTS
 
 - [Begin, inhale](6:beep)
 - [Exhale](6:beep)
@@ -83,7 +88,7 @@
 - [Inhale](6:beep)
 - [Exhale](6:beep)
 
----
+### TIMEDETAILS
 
 - -- INHALES --
 - Leg muscles strong, kneecaps lift up
@@ -124,8 +129,7 @@
 - Keep your grip tight, ten fingers interlaced
 - Arms and head movements synchronized
 - ONLY the arms and head move
-- The breath and the movements are synchronized. Slow down your arms and head to match the pace of
-- the breath
+- The breath and the movements are synchronized. Slow down your arms and head to match the pace of the breath
 - The more you open your lungs, the more air you hold in your lungs
 - You are improving the elasticity of the lungs
 - The more you put into opening breathing, the better the postures feel throughout class
@@ -133,8 +137,11 @@
 - Very slowly, not too quickly
 - The slower you go the better. You will use your lungs more
 - This breathing exercise warms your body up from the inside while the heat works on that from the outside
+### TEARDOWN
 
 ## **HALF MOON** POSE WITH HANDS TO FEET POSE – ARDHA-CHANDRASANA WITH PAD A-HASTASANA
+
+### SETUP
 
 - Put your feet together, heels and toes touching each other
 - Arms over your head sideways put your palms together. Interlace the fingers, release the index fingers,
@@ -169,6 +176,8 @@
 
 ## **BACKWARD BENDING**
 
+### SETUP
+
 - Everybody moving together; give it all you have!
 - Take a deep breath, full lungs, stretch up to touch the ceiling, bring your head back as far as you can
 - Look behind you. Arms back immediately, try to touch the wall behind you
@@ -186,6 +195,8 @@
 - Backward bending is the most healing motion for the spine
 
 ## **HANDS TO FEET** POSE
+
+### SETUP
 
 - Suck your stomach in, bend your knees and come down with a straight spine, put your hands on the floor in front of you.
 - Bend your knees one by one and move your hips several times, right and left, right and left. 
@@ -221,6 +232,8 @@
 
 ## **AWKWARD** POSE - **1** - UTKATASANA
 
+### SETUP
+
 - Step your right foot to the right, approximately six inches apart. Hip-width between your toes and heels
 - Heels invisible behind the toes. Don’t change your feet throughout the entire posture
 - Inhale, arms up parallel to the floor. Keep your five fingers together, touching each other. 
@@ -249,6 +262,8 @@
 
 ## **AWKWARD** POSE - **2** - UTKATASANA
 
+### SETUP
+
 - Complete concentration, focus one point in the mirror
 - Stand up on your toes maximum. 
 - Stretch your spine, chest, head, whole upper body up towards the ceiling
@@ -268,6 +283,8 @@
 
 ## **AWKWARD** POSE - **3** - UTKATASANA
 
+### SETUP
+
 - Come up on your toes a little bit and bring your knees together
 - Take deep breath
 - Exhale breathing, suck your stomach in, spine straight
@@ -286,6 +303,8 @@
 - You are warming up the lower body for class
 
 ## **EAGLE** POSE - GARURASANA
+
+### SETUP
 
 - Feet together. Eyes focused in the mirror. Be still
 - Inhale. Arms over your head sideways
@@ -325,6 +344,8 @@
 - This posture is very good for the endocrine system
 
 ## STANDING **HEAD TO KNEE** POSE – DANDAYAMANA - JANUSIRASANA
+
+### SETUP
 
 - Put your feet together
 - Shift your weight to your left leg
@@ -368,6 +389,8 @@
 
 ## STANDING **BOW PULLING** POSE – DANDAYAMANA - DHANURASANA
 
+### SETUP
+
 - Look forward, concentrate one point in the mirror
 - Bring your right hand out, palm facing up, elbow touching your body
 - Without turning or twisting your hand, keep your palm towards the ceiling, thumb towards the back wall, pick up your right foot behind you
@@ -395,6 +418,8 @@
 - There should be a twist in your middle and upper spine
 
 ## **BALANCING STICK** – TULADANDASANA
+
+### SETUP
 
 - Feet together, toes and heels touching
 - Arms over your head sideways bring your palms together. Interlock the fingers, release the index fingers, thumbs crossed
@@ -426,6 +451,8 @@
 
 ## STANDING SEPARATE **LEG STRETCHING** POSE – DANDAYAMANA BIBHAKTAPADA PASCHIMOTTHANAS ANA
 
+### SETUP
+
 - Feet together. Arms over the head sideways
 - Right leg step to the right, four feet minimum. At the same time, arms down parallel to the floor
 - Heels in one line, feet slightly pigeon toed. Arms parallel to the floor
@@ -454,6 +481,8 @@
 - One day your spine should be perfectly straight from the coccyx to the neck, forehead touching the floor between the feet
 
 ## **TRIANGLE** POSE – TRIKANASANA
+
+### SETUP
 
 - Feet together. Arms over the head sideways. Right leg steps to the right – A BIG STEP – four feet minimum
 - Immediately arms down parallel to the floor, palms facing down
@@ -485,6 +514,8 @@
 
 ## STANDING SEPARATE LEG **HEAD TO KNEE** POSE – DANDAYAMANA BIBHAKTAPADA JANUSHIRASANA
 
+### SETUP
+
 - Feet together
 - Bring your arms over your head sideways. Palms together and thumbs crossed
 - Stretch your arms up towards the ceiling. Throughout the posture keep your arms straight and right next to your ears
@@ -509,6 +540,8 @@
 - Very stimulating for the whole endocrine system
 
 ## **TREE** POSE – TADASANA AND **TOE STAND** – PADANGUSTASANA
+
+### SETUP
 
 - (skip toe stand in 60 min class, combine with tree pose in 90 min class)
 - Step back to the centre of your mat. Feet together. Focus on one point in the mirror
@@ -544,6 +577,8 @@
 
 ## **DEAD BODY** POSE – SAVASANA
 
+### SETUP
+
 - Turn around and lie on your back, feet facing the back wall
 - Relax completely
 - Heels together, feet fall open
@@ -561,6 +596,8 @@
 - This is where you receive all the benefits of the previous poses
 
 ## **WIND REMOVING** POSE – PAVANAMUKTASANA
+
+### SETUP
 
 - Bring your right leg up, hold the right leg two inches below the kneecap, interlocked fingers, strong grip
 - Relax your shoulders on the floor. Let them stay there
@@ -590,6 +627,8 @@
 
 ## **BOAT** POSE - NAVASANA
 
+### SETUP
+
 - Bring your legs straight in front of you. Press your hands on the floor, right behind your hips, fingers pointing toward the feet, arms straight. Lift your chest/sternum. Lean back slightly. Keep your spine straight. 
 - Continiously stretch your chest up. Balance on both hips
 - Exhale, bend your knees and get your thighs 45 degrees to the floor. Then, gently lift your feet off the floor a few inches. Lengthen your tailbone into the floor. If you can keep your spine straight and chest up, slowly straighten your legs and lift them up, toes at the level of your eyes. 
@@ -608,6 +647,8 @@
 
 ## **SIT-UP**
 
+### SETUP
+
 - **-- VARIATION 1 --**
 - Toes and heels together. Flex your feet, keep your heels on the floor
 - Arms over your head, cross your thumbs, arms and head together. Chin to your chest
@@ -625,6 +666,8 @@
 
 ## **DOWNWARD FACING DOG** POSE - ADHO MUKHA SVANASANA
 
+### SETUP
+
 - Come onto your hands and knees. Knees directly below your hips and your hands slightly forward of your shoulders. Spread your palms, index fingers parallel or slightly out. Get on the balls of your feet
 - Exhale and lift your knees away from the floor. First keep your knees slightly bent and the heels lifted away from the floor. Hands shoulder distance, feet hip distance. Grip the floor with your hands and press you shoulder away from your ears
 - Lengthen your tailbone away from the your pelvis and press it toward your pubis. Lift hips toward the ceiling. Strong legs, squeeze/pull your inner legs up
@@ -639,6 +682,8 @@
 - Stretches the shoulders, hamstrings, calves, arches, and hands. Strengthens the arms and legs
 
 ## **FOUR-LIMBED STAFF** POSE - CHATURANGA DANDASANA
+
+### SETUP
 
 - HIGH PLANK
 - Press your hands and feet into the floor, hips up (downward dog). Inhale and bring your upper body forward until your arms are perpendicular to the floor, shoulders directly over the wrists, torso parallel to the floor
@@ -664,6 +709,8 @@
 
 ## **COBRA** POSE – BHUJANGASANA
 
+### SETUP
+
 - Lie down on your stomach. Chin out, neck/throat flat on the floor
 - Place your hands under the shoulders, very close to your chest
 - Throughout the posture, keep your five fingers together, palms flat on the floor, square underneath your
@@ -687,6 +734,8 @@
 - Your legs are like a cobra’s tail
 
 ## **LOCUST** POSE – SALABASANA
+
+### SETUP
 
 - Lay on your stomach. Bring your chin forward, neck/throat on the floor
 - Arms straight, lift your stomach up and get your arms underneath your body
@@ -725,6 +774,8 @@
  
 ## **FULL LOCUST** POSE – POORNA - SALABASANA
 
+### SETUP
+
 - Chin on the floor
 - Bring your arms out to the side like wings
 - Palms down, fingers together
@@ -753,6 +804,8 @@
 
 ## **BOW** POSE – DHANURASANA
 
+### SETUP
+
 - Chin on the floor
 - Hold your feet from the outside, just below your toes
 - Five fingers together; make sure your thumbs are touching with the index fingers
@@ -778,6 +831,8 @@
 - Grip tight, arms and chest stretching
 
 ## **FIXED FIRM** POSE – SUPTA - VAJRASANA
+
+### SETUP
 
 - Come to the top of your towel
 - Sit down on your heels
@@ -807,6 +862,8 @@
 
 ## **HALF TORTOISE** POSE – ARDHA - KURMASANA
 
+### SETUP
+
 - Come to the middle of your towel
 - Sit down on your heels, toes, ankles and knees touching. Top of the feet flat on the floor, no gap
 - underneath
@@ -832,6 +889,8 @@
 - This is a traction pose, nourishing your spine
 
 ## **CAMEL** POSE – USTRASANA
+
+### SETUP
 
 - Listen very carefully. Every posture set up is completed in a specific order
 - Let’s move together
@@ -865,6 +924,8 @@
 
 ## **RABBIT** POSE – SASANGASANA
 
+### SETUP
+
 - Come to the middle of the towel. Sit down on your heels, feet and knees together
 - Put the towel on your heels; grab the heels over the towel, fingers inside, thumbs outside
 - Strong grip, don’t lose the grip
@@ -893,6 +954,8 @@
 
 ## **HEAD TO KNEE** WITH STRETCHING POSE – JANUSHIRASANA WITH P ASCHIMOTTANASANA
 
+### SETUP
+
 - 1 set
 - Turn around and sit facing the mirror
 - Bring your right leg out to the right corner of your mat. Bend your left leg and put your left foot against your right leg
@@ -915,6 +978,8 @@
 
 ## **BOTH LEGS**
 
+### SETUP
+
 - Bring your both legs forward in front of you, feet together. Lie down on your back and do a quick sit up
 - Grab your big toes with your middle and index fingers. Pull your toes toward your shins. Walk your hips back right and left, right and left several times, until both of your legs are straight and your pelvis starts to tilt more forward
 - Flex your feet; your heels should come off the floor in the air, back of the knees on the floor. You should feel the thigh muscles contracting
@@ -933,6 +998,8 @@
 - Make sure your stomach is in to protect your back
 
 ## **SPINE TWISTING** POSE – ARDHA - MATSYENDRASANA
+
+### SETUP
 
 - 1 set
 - Turn around and sit facing the left side of the room
@@ -963,6 +1030,8 @@
 
 ## **BLOWING IN FIRM** POSE – KAPALBHATI IN VAJRAS ANA
 
+### SETUP
+
 - 2 x 60
 - Sit down on your heels, feet together, or sit with your legs crossed. Eyes focused in the mirror
 - We started with the Pranayama deep breathing exercise and we end with another breathing exercise
@@ -980,6 +1049,8 @@
 - Your face and mouth should be relaxed
 
 ## ENDING MEDITATION
+
+### SETUP
 
 - We began our practice today with stillness and we end with stillness
 - Please come seated with your legs crossed and spine straight. Sit in lotus if you are able (teacher demonstrate)

@@ -18352,9 +18352,47 @@ define('scripts/CommonMarkDsl',["require", "exports", "commonmark"], function (r
                 this.error(null, "Document is empty");
             this.current = parsed.firstChild;
         }
+        CommonMarkDsl.prototype.isHorizontalRule = function () {
+            return this.current.type === "HorizontalRule";
+        };
         CommonMarkDsl.prototype.parseHorizontalRule = function () {
-            if (this.current.type !== "HorizontalRule")
+            if (!this.isHorizontalRule())
                 this.error(this.current, "Expected horizontal rule, i.e. ---");
+            this.current = this.current.next;
+        };
+        CommonMarkDsl.prototype.isHeader = function () {
+            return this.current.type === CommonMarkNodeType.Header;
+        };
+        CommonMarkDsl.prototype.parseHeader = function (level) {
+            var header = this.current;
+            if (!header)
+                this.error(header, "Expected a level " + level + " header, but found no element");
+            if (header.type !== CommonMarkNodeType.Header)
+                this.error(header, "Expected a level " + level + " header but found element of type '" + header.type + "'");
+            if (header.level !== level)
+                this.error(header, "Expected a level " + level + " header but found a header of level '" + header.level + "'");
+            var titleTextNode = header.firstChild;
+            var titleText = this.parseTextNode(titleTextNode);
+            if (!titleText)
+                this.error(titleTextNode, "The expected level " + level + " header has no contents");
+            if (titleText.text.length === 0)
+                this.error(titleTextNode, "The expected level " + level + " header has no contents");
+            this.current = this.current.next;
+            return titleText;
+        };
+        CommonMarkDsl.prototype.isSpecialHeader = function (level, text) {
+            if (this.isHeader()) {
+                var header = this.current;
+                if (header.level === level && header.firstChild.literal.trim() === text) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        CommonMarkDsl.prototype.parseSpecialHeader = function (level, text) {
+            if (!this.isSpecialHeader(level, text)) {
+                this.error(this.current, "Expected a level " + level + " header with text: " + text);
+            }
             this.current = this.current.next;
         };
         CommonMarkDsl.prototype.parseListOfTextItems = function () {
@@ -18424,29 +18462,6 @@ define('scripts/CommonMarkDsl',["require", "exports", "commonmark"], function (r
             }
             this.current = this.current.next;
             return links;
-        };
-        CommonMarkDsl.prototype.parseHeader = function (level) {
-            var header = this.current;
-            if (!header)
-                this.error(header, "Expected a level " + level + " header, but found no element");
-            if (header.type !== CommonMarkNodeType.Header)
-                this.error(header, "Expected a level " + level + " header but found element of type '" + header.type + "'");
-            if (header.level !== level)
-                this.error(header, "Expected a level " + level + " header but found a header of level '" + header.level + "'");
-            var titleTextNode = header.firstChild;
-            var titleText = this.parseTextNode(titleTextNode);
-            if (!titleText)
-                this.error(titleTextNode, "The expected level " + level + " header has no contents");
-            if (titleText.text.length === 0)
-                this.error(titleTextNode, "The expected level " + level + " header has no contents");
-            this.current = this.current.next;
-            return titleText;
-        };
-        CommonMarkDsl.prototype.isHeader = function () {
-            return this.current.type === CommonMarkNodeType.Header;
-        };
-        CommonMarkDsl.prototype.isHorizontalRule = function () {
-            return this.current.type === "HorizontalRule";
         };
         CommonMarkDsl.prototype.hasMore = function () {
             return this.current != null;
@@ -18624,21 +18639,42 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
             this._stateChanged = null;
             while (dsl.hasMore()) {
                 var name = dsl.parseHeader(2);
-                var setupSteps = dsl.parseListOfTextItems();
+                var setupSteps = [];
                 var timePoints = [];
+                var timeSteps = [];
                 var teardownSteps = [];
-                if (!!dsl.current && dsl.isHorizontalRule()) {
-                    dsl.parseHorizontalRule();
-                    if (!!dsl.current && !dsl.isHorizontalRule() && !dsl.isHeader()) {
-                        var links = dsl.parseListOfLinkItems();
-                        timePoints = this.linksToTimePoints(links);
-                        if (!!dsl.current && dsl.isHorizontalRule()) {
-                            dsl.parseHorizontalRule();
-                            teardownSteps = dsl.parseListOfTextItems();
-                        }
+                if (!!dsl.current && dsl.isSpecialHeader(3, "SETUP")) {
+                    dsl.parseSpecialHeader(3, "SETUP");
+                    if (!!dsl.current && !dsl.isHeader()) {
+                        setupSteps = dsl.parseListOfTextItems();
                     }
                 }
-                this.exercises.push({ name: name, setupSteps: setupSteps, timePoints: timePoints, teardownSteps: teardownSteps });
+                if (!!dsl.current && dsl.isSpecialHeader(3, "TIMEPOINTS")) {
+                    dsl.parseSpecialHeader(3, "TIMEPOINTS");
+                    if (!!dsl.current && !dsl.isHeader()) {
+                        var links = dsl.parseListOfLinkItems();
+                        timePoints = this.linksToTimePoints(links);
+                    }
+                }
+                if (!!dsl.current && dsl.isSpecialHeader(3, "TIMEDETAILS")) {
+                    dsl.parseSpecialHeader(3, "TIMEDETAILS");
+                    if (!!dsl.current && !dsl.isHeader()) {
+                        timeSteps = dsl.parseListOfTextItems();
+                    }
+                }
+                if (!!dsl.current && dsl.isSpecialHeader(3, "TEARDOWN")) {
+                    dsl.parseSpecialHeader(3, "TEARDOWN");
+                    if (!!dsl.current && !dsl.isHeader()) {
+                        teardownSteps = dsl.parseListOfTextItems();
+                    }
+                }
+                this.exercises.push({
+                    name: name,
+                    setupSteps: setupSteps,
+                    timePoints: timePoints,
+                    timeSteps: timeSteps,
+                    teardownSteps: teardownSteps
+                });
             }
             this.duration = 90;
             this.go(0);
@@ -40715,14 +40751,21 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
         render: function() {
             var timePoint = this.props.timePoint;
             return (
-                React.createElement("div", {className: "timer"}, 
-                    React.createElement(CircularTimer, {seconds: timePoint.duration, 
-                                   color: "#FF9B00", 
-                                   up: true, 
-                                   doneText: "OK", 
-                                   onComplete: this.onComplete}), 
-                    React.createElement("h2", null, timePoint.text.short), 
-                    React.createElement("h2", null, "[", this.props.index+1, " of ", this.props.count, "]")
+                React.createElement("div", {className: "timercontainer"}, 
+                    React.createElement("div", {className: "timer"}, 
+                        React.createElement(CircularTimer, {size: 100, 
+                                       seconds: timePoint.duration, 
+                                       color: "#FF9B00", 
+                                       up: true, 
+                                       doneText: "OK", 
+                                       onComplete: this.onComplete})
+                    ), 
+                    React.createElement("div", {className: "timerdetails"}, 
+                        React.createElement("h2", null, 
+                            "[", this.props.index+1, " of ", this.props.count, "]", React.createElement("br", null), 
+                            timePoint.text.short
+                        )
+                    )
                 )
             )
         },
@@ -40811,6 +40854,10 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
                                                    count: exerciseManager.exerciseTimePointsCount(), 
                                                    onComplete: this.timerDone});
             }
+            var renderTimeSteps;
+            if (currentExercise.timeSteps.length > 0) {
+                renderTimeSteps = React.createElement(Steps, {id: "timesteps", items: currentExercise.timeSteps, rootUri: rootUri})
+            }
 
             if (!exerciseManager.isStarted()) {
                 return (
@@ -40840,7 +40887,8 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
                 return (
                     React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
                         React.createElement("h1", null, currentExercise.name.short), 
-                        renderTimePoints
+                        renderTimePoints, 
+                        renderTimeSteps
                     )
                 );
             }
