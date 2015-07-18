@@ -7191,8 +7191,9 @@ body {
   margin: 0px !important;
   border-width: 3px !important; }
   .stepList li {
-    padding-top: 6px;
-    padding-bottom: 6px;
+    margin-left: 0px !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border-width: 2px; }
 .stepItem {
   font-size: 18px;

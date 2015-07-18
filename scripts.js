@@ -18563,8 +18563,7 @@ define('scripts/StateManager',["require", "exports", "jquery", 'scripts/IndexMan
             }
             else {
                 this.indices = [];
-                this.addIndex("artifacts/index.md", "Local");
-                this.addIndex("https://raw.githack.com/wiki/svdoever/trainercoach/indexhotyoga.md", "Hot Yoga");
+                this.addIndex("artifacts/index.md", "Sample training");
             }
         }
         StateManager.prototype.initialize = function () {
@@ -40665,7 +40664,15 @@ define('scripts/components/Steps',['react'], function(React) {
                 React.createElement("ul", {key: stepsId, className: "list inset stepList"}, 
                     
                         this.props.items.map(function(item, i) {
-                            return React.createElement("li", {className: "stepItem", key: stepsId + i, onClick: _this.onClick.bind(null, item)}, item.short);
+                            var text = item.short;
+                            if (text.length > 4 && text.substring(0,2) === "--" && text.indexOf("--", text.length - 2) !== -1) {
+                                // text in format --blabla--, now remove -- at beginning and end
+                                text = text.substring(2, text.length - 4);
+                                return React.createElement("li", {className: "stepItem divider", key: stepsId + i}, text);
+                            } else {
+                                return React.createElement("li", {className: "stepItem", key: stepsId + i, 
+                                           onClick: _this.onClick.bind(null, item)}, text);
+                            }
                         })
                     
                 )
@@ -40781,6 +40788,11 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
             this.props.exerciseManager.setStateChanged(null);
         },
 
+        componentWillReceiveProps: function(nextProps) {
+            console.log("will receive new");
+            React.findDOMNode(this.refs.exercisesPanel).scrollTop = 0;
+        },
+
         timerDone: function () {
             var exerciseManager = this.props.exerciseManager;
             exerciseManager.exerciseTimePointExecuteDone();
@@ -40851,7 +40863,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 
             if (exerciseManager.isExerciseStateSetup()) {
                 return (
-                    React.createElement("div", {className: "panel active"}, 
+                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
                         React.createElement("h1", null, currentExercise.name.short), 
                         React.createElement(Steps, {id: "setup", items: currentExercise.setupSteps, rootUri: rootUri})
                     )
@@ -40860,7 +40872,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 
             if (exerciseManager.isExerciseStateTeardown()) {
                 return (
-                    React.createElement("div", {className: "panel active"}, 
+                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
                         React.createElement("h1", null, currentExercise.name.short), 
                         React.createElement(Steps, {id: "teardown", items: currentExercise.teardownSteps, rootUri: rootUri})
                     )
@@ -40869,7 +40881,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 
             if (exerciseManager.isExerciseStateTimePoints()) {
                 return (
-                    React.createElement("div", {className: "panel active"}, 
+                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
                         React.createElement("h1", null, currentExercise.name.short), 
                         renderTimePoints
                     )
@@ -40880,7 +40892,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
                 var currentExercise = exerciseManager.exerciseIndex();
 
                 return (
-                    React.createElement("div", {className: "panel active"}, 
+                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
                         React.createElement("h1", null, "All (select one)"), 
                         React.createElement("ul", {key: "exercises_list", className: "list inset stepList"}, 
                             
@@ -40898,7 +40910,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
             }
 
             return (
-                React.createElement("div", {className: "panel active"}, 
+                React.createElement("div", {className: "panel active", id: "exercisesPanel"}, 
                     React.createElement("h1", null, currentExercise.name.short), 
                     "THIS STATE SHOULD NEVER BE REACHED"
                 )

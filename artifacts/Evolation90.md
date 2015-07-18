@@ -1,5 +1,12 @@
 # Evolation 90
 
+## ABOUT
+
+- Evolation hot yoga 90 minutes asana essentials
+- This material is used as personal test material in developing the Trainer-Coach app, and is made available for the Evolation teacher training that is currently running in Amsterdam to help the students study to their asanas
+- This material is copyright 2015, Evalation
+- Namaste
+
 ## WELCOME
 
 - Good morning
