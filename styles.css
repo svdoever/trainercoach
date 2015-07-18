@@ -7196,8 +7196,13 @@ body {
     padding-bottom: 5px;
     border-width: 2px; }
 .stepItem {
+  padding-right: 10px;
   font-size: 18px;
   font-weight: bold; }
+.stepItem.divider {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  text-align: center; }
 .stepItem.current {
   background-color: #ff9b00;
   color: white; }

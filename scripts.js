@@ -40666,8 +40666,8 @@ define('scripts/components/Steps',['react'], function(React) {
                         this.props.items.map(function(item, i) {
                             var text = item.short;
                             if (text.length > 4 && text.substring(0,2) === "--" && text.indexOf("--", text.length - 2) !== -1) {
-                                // text in format --blabla--, now remove -- at beginning and end
-                                text = text.substring(2, text.length - 4);
+                                // text in format -- blabla --, now remove -- at beginning and end and trim
+                                text = text.substring(2, text.length - 2).trim();
                                 return React.createElement("li", {className: "stepItem divider", key: stepsId + i}, text);
                             } else {
                                 return React.createElement("li", {className: "stepItem", key: stepsId + i, 
@@ -41038,10 +41038,10 @@ define('scripts/components/ExercisesController',['require','react'],function(req
             if (exerciseManager.currentExerciseHasSetupSteps()) {
                 classes = "icon check" + (exerciseManager.isExerciseStateSetup() ? " pressed" : "");
                 icons.push(React.createElement("a", {key: "i2e", ref: "iconSetup", className: classes, href: "#setup", 
-                              onClick: this.setupClick}, "Setup"));
+                              onClick: this.setupClick}, "Go in"));
             } else {
                 icons.push(React.createElement("a", {key: "i2d", ref: "iconSetup", className: "icon check disabled", 
-                              onClick: this.ignoreClick}, "Setup"));
+                              onClick: this.ignoreClick}, "Go in"));
             }
             if (exerciseManager.currentExerciseHasTimePoints()) {
                 classes = "icon clock" + (exerciseManager.isExerciseStateTimePoints() ? " pressed" : "");
@@ -41054,10 +41054,10 @@ define('scripts/components/ExercisesController',['require','react'],function(req
             if (exerciseManager.currentExerciseHasTeardownSteps()) {
                 classes = "icon close" + (exerciseManager.isExerciseStateTeardown() ? " pressed" : "");
                 icons.push(React.createElement("a", {key: "i4e", ref: "iconTeardown", className: classes, href: "#teardown", 
-                              onClick: this.teardownClick}, "Teardown"));
+                              onClick: this.teardownClick}, "Go out"));
             } else {
                 icons.push(React.createElement("a", {key: "i4d", ref: "iconTeardown", className: "icon close disabled", 
-                              onClick: this.ignoreClick}, "Teardown"));
+                              onClick: this.ignoreClick}, "Go out"));
             }
             if (exerciseManager.isLast()) {
                 icons.push(React.createElement("a", {key: "i5d", ref: "iconNext", className: "icon right disabled", 
@@ -41068,10 +41068,10 @@ define('scripts/components/ExercisesController',['require','react'],function(req
             }
 
             if (exerciseManager.isExerciseStateList()) {
-                icons.push(React.createElement("a", {key: "i6active", ref: "iconList", className: "icon stack pressed", href: "", 
+                icons.push(React.createElement("a", {key: "i6active", ref: "iconList", className: "icon database pressed", href: "", 
                               onClick: this.listHideClick}, "List"));
             } else {
-                icons.push(React.createElement("a", {key: "i6inactive", ref: "iconList", className: "icon stack", href: "", 
+                icons.push(React.createElement("a", {key: "i6inactive", ref: "iconList", className: "icon database", href: "", 
                               onClick: this.listShowClick}, "List"));
             }
 
