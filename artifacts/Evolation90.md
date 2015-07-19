@@ -8,11 +8,6 @@
 - This material is copyright 2015, Evolation
 - Namaste
 
-### TIMEPOINTS
-
-- [Begin, inhale](6:beep)
-- [Exhale](6:beep)
-
 ## WELCOME
 
 ### SETUP

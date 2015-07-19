@@ -40760,8 +40760,8 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
         render: function() {
             var timePoint = this.props.timePoint;
             return (
-                React.createElement("div", {className: "timercontainer"}, 
-                    React.createElement("div", {className: "timer"}, 
+                React.createElement("div", {className: "timepointContainer"}, 
+                    React.createElement("div", {className: "timepointTimer"}, 
                         React.createElement(CircularTimer, {size: 100, 
                                        seconds: timePoint.duration, 
                                        color: "#FF9B00", 
@@ -40769,7 +40769,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
                                        doneText: "OK", 
                                        onComplete: this.onComplete})
                     ), 
-                    React.createElement("div", {className: "timerdetails"}, 
+                    React.createElement("div", {className: "timepointDetails"}, 
                         React.createElement("h2", null, 
                             "[", this.props.index+1, " of ", this.props.count, "]", React.createElement("br", null), 
                             timePoint.text.short
@@ -40835,105 +40835,144 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
             this.props.exerciseManager.startTimepoints();
         },
 
-        render: function () {
+        render_List: function() {
             var _this = this;
             var exerciseManager = this.props.exerciseManager;
             var rootUri = exerciseManager.rootUri;
             var currentExercise = exerciseManager.exercise();
             $.afui.setTitle(exerciseManager.title);
 
-            var renderTimePoints;
-            if (exerciseManager.isExerciseTimePointsCompleted()) {
-                renderTimePoints = (
-                    React.createElement("div", null, 
-                        React.createElement("div", null, 
-                            React.createElement("h1", null, "COMPLETED")
-                        ), 
-                        React.createElement("div", null, 
-                            React.createElement("a", {href: "", onClick: this.onStartClick}, 
-                                React.createElement("h1", null, "RESTART")
-                            )
-                        )
+            return (
+                React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
+                    React.createElement("h1", null, "All (select one)"), 
+                    React.createElement("ul", {key: "exercises_list", className: "list inset stepList"}, 
+                    
+                        exerciseManager.getExercises().map(function(exercise, i) {
+                            if (exercise === currentExercise) {
+                                return (React.createElement("li", {className: "stepItem current", key: "ex" + i}, exercise.name.short));
+                            } else {
+                                return (React.createElement("li", {className: "stepItem", key: "ex" + i, onClick: _this.onExerciseListClick.bind(null, i)}, exercise.name.short));
+                            }
+                        })
+                    
                     )
-                );
-            } else if (!exerciseManager.isExerciseTimePointsInProgress()) {
-                renderTimePoints = (
-                    React.createElement("div", null, 
-                        React.createElement("a", {onClick: this.timePointsInProgress}, React.createElement("h1", null, "START"))
-                    )
-                );
-            } else {
-                renderTimePoints = React.createElement(TimePointTimer, {timePoint: exerciseManager.exerciseTimePoint(), 
-                                                   index: exerciseManager.exerciseTimePointIndex(), 
-                                                   count: exerciseManager.exerciseTimePointsCount(), 
-                                                   onComplete: this.timerDone});
-            }
-            var renderTimeSteps;
-            if (currentExercise.timeSteps.length > 0) {
-                renderTimeSteps = React.createElement(Steps, {id: "timesteps", items: currentExercise.timeSteps, rootUri: rootUri})
-            }
+                )
+            );
+        },
 
-            if (!exerciseManager.isStarted()) {
-                return (
-                    React.createElement("a", {href: "", onClick: this.onStartClick}, "START")
-                );
+        render_Setup: function() {
+            var exerciseManager = this.props.exerciseManager;
+            var rootUri = exerciseManager.rootUri;
+            var currentExercise = exerciseManager.exercise();
+            $.afui.setTitle(exerciseManager.title);
+
+            return (
+                React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
+                    React.createElement("h1", null, currentExercise.name.short), 
+                    React.createElement(Steps, {id: "setup", items: currentExercise.setupSteps, rootUri: rootUri})
+                )
+            );
+
+        },
+
+        render_TearDown: function() {
+            var exerciseManager = this.props.exerciseManager;
+            var rootUri = exerciseManager.rootUri;
+            var currentExercise = exerciseManager.exercise();
+            $.afui.setTitle(exerciseManager.title);
+
+            return (
+                React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
+                    React.createElement("h1", null, currentExercise.name.short), 
+                    React.createElement(Steps, {id: "teardown", items: currentExercise.teardownSteps, rootUri: rootUri})
+                )
+            );
+        },
+
+        render_TimePoints: function() {
+            var exerciseManager = this.props.exerciseManager;
+            if (!exerciseManager.isExerciseTimePointsInProgress() &&
+                !exerciseManager.isExerciseTimePointsCompleted()) {
+                return this.render_TimePointsStart();
+            }
+            if (exerciseManager.isExerciseTimePointsInProgress()) {
+                return this.render_TimePointsInProgress();
+            }
+            if (exerciseManager.isExerciseTimePointsCompleted()) {
+                return this.render_TimePointsCompleted();
+            }
+        },
+
+        render_TimePointsStart: function() {
+            var exerciseManager = this.props.exerciseManager;
+            var rootUri = exerciseManager.rootUri;
+            var currentExercise = exerciseManager.exercise();
+            $.afui.setTitle(exerciseManager.title);
+
+            return (
+                React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
+                    React.createElement("h1", null, currentExercise.name.short), 
+                    React.createElement("a", {onClick: this.timePointsInProgress}, React.createElement("h1", null, "START")), 
+                    React.createElement(Steps, {id: "timesteps", items: currentExercise.timeSteps, rootUri: rootUri})
+                )
+            );
+        },
+
+        render_TimePointsInProgress: function() {
+            var exerciseManager = this.props.exerciseManager;
+            var rootUri = exerciseManager.rootUri;
+            var currentExercise = exerciseManager.exercise();
+            $.afui.setTitle(exerciseManager.title);
+
+            return (
+                React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
+                    React.createElement("h1", null, currentExercise.name.short), 
+                    React.createElement(TimePointTimer, {timePoint: exerciseManager.exerciseTimePoint(), 
+                                    index: exerciseManager.exerciseTimePointIndex(), 
+                                    count: exerciseManager.exerciseTimePointsCount(), 
+                                    onComplete: this.timerDone}), 
+                    React.createElement(Steps, {id: "timesteps", items: currentExercise.timeSteps, rootUri: rootUri})
+                )
+            );
+        },
+
+        render_TimePointsCompleted: function () {
+            var exerciseManager = this.props.exerciseManager;
+            var rootUri = exerciseManager.rootUri;
+            var currentExercise = exerciseManager.exercise();
+            $.afui.setTitle(exerciseManager.title);
+
+            return (
+                React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
+                    React.createElement("h1", null, currentExercise.name.short), 
+                    React.createElement("h1", null, "COMPLETED"), 
+                    React.createElement("a", {href: "", onClick: this.onStartClick}, 
+                        React.createElement("h1", null, "RESTART")
+                    )
+                )
+            );
+        },
+
+        render: function () {
+            var exerciseManager = this.props.exerciseManager;
+
+            if (exerciseManager.isExerciseStateList()) {
+                return this.render_List();
             }
 
             if (exerciseManager.isExerciseStateSetup()) {
-                return (
-                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
-                        React.createElement("h1", null, currentExercise.name.short), 
-                        React.createElement(Steps, {id: "setup", items: currentExercise.setupSteps, rootUri: rootUri})
-                    )
-                );
+                return this.render_Setup();
             }
 
             if (exerciseManager.isExerciseStateTeardown()) {
-                return (
-                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
-                        React.createElement("h1", null, currentExercise.name.short), 
-                        React.createElement(Steps, {id: "teardown", items: currentExercise.teardownSteps, rootUri: rootUri})
-                    )
-                );
+                return this.render_Teardown();
             }
 
             if (exerciseManager.isExerciseStateTimePoints()) {
-                return (
-                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
-                        React.createElement("h1", null, currentExercise.name.short), 
-                        renderTimePoints, 
-                        renderTimeSteps
-                    )
-                );
+                return this.render_TimePoints();
             }
 
-            if (exerciseManager.isExerciseStateList()) {
-                var currentExercise = exerciseManager.exerciseIndex();
-
-                return (
-                    React.createElement("div", {className: "panel active", ref: "exercisesPanel"}, 
-                        React.createElement("h1", null, "All (select one)"), 
-                        React.createElement("ul", {key: "exercises_list", className: "list inset stepList"}, 
-                            
-                                exerciseManager.getExercises().map(function(exercise, i) {
-                                    if (i === currentExercise) {
-                                        return React.createElement("li", {className: "stepItem current", key: "ex" + i}, exercise.name.short);
-                                    } else {
-                                        return React.createElement("li", {className: "stepItem", key: "ex" + i, onClick: _this.onExerciseListClick.bind(null, i)}, exercise.name.short);
-                                    }
-                                })
-                            
-                        )
-                    )
-                );
-            }
-
-            return (
-                React.createElement("div", {className: "panel active", id: "exercisesPanel"}, 
-                    React.createElement("h1", null, currentExercise.name.short), 
-                    "THIS STATE SHOULD NEVER BE REACHED"
-                )
-            )
+            throw new Error("Exercises.jsx: render() unexpected state")
         }
     });
     return Exercises;
@@ -41048,18 +41087,18 @@ define('scripts/components/ExercisesController',['require','react'],function(req
             var classes;
             var icons = [];
             if (exerciseManager.isFirst()) {
-                icons.push(React.createElement("a", {key: "i1d", ref: "iconPrev", className: "icon left disabled", 
+                icons.push(React.createElement("a", {key: "i1d", ref: "iconPrev", className: "icon arrow-left disabled", 
                               onClick: this.ignoreClick}, "Prev"));
             } else {
-                icons.push(React.createElement("a", {key: "i1e", ref: "iconPrev", className: "icon left", href: "", 
+                icons.push(React.createElement("a", {key: "i1e", ref: "iconPrev", className: "icon arrow-left", href: "", 
                               onClick: this.prevClick}, "Prev"));
             }
             if (exerciseManager.currentExerciseHasSetupSteps()) {
-                classes = "icon check" + (exerciseManager.isExerciseStateSetup() ? " pressed" : "");
+                classes = "icon enter" + (exerciseManager.isExerciseStateSetup() ? " pressed" : "");
                 icons.push(React.createElement("a", {key: "i2e", ref: "iconSetup", className: classes, href: "#setup", 
                               onClick: this.setupClick}, "Go in"));
             } else {
-                icons.push(React.createElement("a", {key: "i2d", ref: "iconSetup", className: "icon check disabled", 
+                icons.push(React.createElement("a", {key: "i2d", ref: "iconSetup", className: "icon enter disabled", 
                               onClick: this.ignoreClick}, "Go in"));
             }
             if (exerciseManager.currentExerciseHasTimePoints()) {
@@ -41071,26 +41110,26 @@ define('scripts/components/ExercisesController',['require','react'],function(req
                               onClick: this.ignoreClick}, "Timings"));
             }
             if (exerciseManager.currentExerciseHasTeardownSteps()) {
-                classes = "icon close" + (exerciseManager.isExerciseStateTeardown() ? " pressed" : "");
+                classes = "icon exit" + (exerciseManager.isExerciseStateTeardown() ? " pressed" : "");
                 icons.push(React.createElement("a", {key: "i4e", ref: "iconTeardown", className: classes, href: "#teardown", 
                               onClick: this.teardownClick}, "Go out"));
             } else {
-                icons.push(React.createElement("a", {key: "i4d", ref: "iconTeardown", className: "icon close disabled", 
+                icons.push(React.createElement("a", {key: "i4d", ref: "iconTeardown", className: "icon exit disabled", 
                               onClick: this.ignoreClick}, "Go out"));
             }
             if (exerciseManager.isLast()) {
-                icons.push(React.createElement("a", {key: "i5d", ref: "iconNext", className: "icon right disabled", 
+                icons.push(React.createElement("a", {key: "i5d", ref: "iconNext", className: "icon arrow-right disabled", 
                               onClick: this.ignoreClick}, "Next"));
             } else {
-                icons.push(React.createElement("a", {key: "i5e", ref: "iconNext", className: "icon right", href: "", 
+                icons.push(React.createElement("a", {key: "i5e", ref: "iconNext", className: "icon arrow-right", href: "", 
                               onClick: this.nextClick}, "Next"));
             }
 
             if (exerciseManager.isExerciseStateList()) {
-                icons.push(React.createElement("a", {key: "i6active", ref: "iconList", className: "icon database pressed", href: "", 
+                icons.push(React.createElement("a", {key: "i6active", ref: "iconList", className: "icon paragraph-justify pressed", href: "", 
                               onClick: this.listHideClick}, "List"));
             } else {
-                icons.push(React.createElement("a", {key: "i6inactive", ref: "iconList", className: "icon database", href: "", 
+                icons.push(React.createElement("a", {key: "i6inactive", ref: "iconList", className: "icon paragraph-justify", href: "", 
                               onClick: this.listShowClick}, "List"));
             }
 
@@ -41171,7 +41210,7 @@ define('scripts/components/Index',['require','react'],function(require) {
         render: function () {
             return (
                 React.createElement("li", {className: "indexItem"}, 
-                    React.createElement("a", {href: "", dataLink: this.props.link, className: "icon home", 
+                    React.createElement("a", {href: "", dataLink: this.props.link, className: "icon book", 
                        onClick: this.onClick}, this.props.title)
                 )
             );
@@ -41232,7 +41271,7 @@ define('scripts/components/Menu',['require','react','scripts/components/Index'],
                             if (index.isIndexStateAvailable()) {
                                 return (
                                     React.createElement("div", {key: "menuindex" + i}, 
-                                        React.createElement("div", {className: "menuIndexTitle"}, index.title), 
+                                        React.createElement("div", {className: "menuIndexTitle icon books"}, index.title), 
                                         React.createElement(Index, {indexManager: index.manager, handle: _this.props.handle})
                                     )
                                 )
