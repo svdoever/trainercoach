@@ -90,8 +90,6 @@
 
 ### TIMEDETAILS
 
-### TEARDOWN
-
 - -- INHALES --
 - Leg muscles strong, kneecaps lift up
 - Hips a little bit forward, hip muscles tight, contracted
@@ -139,6 +137,7 @@
 - Very slowly, not too quickly
 - The slower you go the better. You will use your lungs more
 - This breathing exercise warms your body up from the inside while the heat works on that from the outside
+### TEARDOWN
 
 ## **HALF MOON** POSE WITH HANDS TO FEET POSE – ARDHA-CHANDRASANA WITH PAD A-HASTASANA
 

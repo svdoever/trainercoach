@@ -18687,13 +18687,16 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
                 console.log("ExerciseManager.stateChanged()");
                 this._stateChanged(this);
             }
+            else {
+                console.log("ExerciseManager.stateChanged() is not defined!");
+            }
         };
         ExerciseManager.prototype.go = function (index) {
             if (index < 0 || index >= this.exercises.length) {
                 throw new Error("Can't go to exercise " + index.toString() + ", only values 0.." + (this.exercises.length - 1).toString() + " allowed");
             }
             this.currentExercise = index;
-            this.exerciseTimePointsRestart();
+            this.exerciseTimePointsReset();
             if (this.currentExerciseHasSetupSteps()) {
                 this.currentExerciseState = ExerciseState.Setup;
             }
@@ -18709,10 +18712,15 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
             console.log("currentExerciseState: " + this.currentExerciseState);
             this.stateChanged();
         };
-        ExerciseManager.prototype.exerciseTimePointsRestart = function () {
+        ExerciseManager.prototype.exerciseTimePointsReset = function () {
             this.currentExerciseTimePointsInProgress = false;
             this.currentExerciseTimePointsCompleted = false;
             this.currentExerciseTimePoint = 0;
+        };
+        ExerciseManager.prototype.startTimepoints = function () {
+            this.exerciseTimePointsReset();
+            this.currentExerciseTimePointsInProgress = true;
+            this.stateChanged();
         };
         ExerciseManager.prototype.getRootUri = function () {
             return this.rootUri;
@@ -18746,6 +18754,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
         ExerciseManager.prototype.start = function () {
             this.started = true;
             this.startTime = new Date();
+            this.exerciseTimePointsReset();
             this.stateChanged();
         };
         ExerciseManager.prototype.getDuration = function () {
@@ -18885,7 +18894,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
             return this.exercise().setupSteps.length > 0;
         };
         ExerciseManager.prototype.currentExerciseHasTimePoints = function () {
-            return this.exercise().timePoints.length > 0;
+            return this.exercise().timePoints.length > 0 || this.exercise().timeSteps.length > 0;
         };
         ExerciseManager.prototype.currentExerciseHasTeardownSteps = function () {
             return this.exercise().teardownSteps.length > 0;
@@ -40789,8 +40798,12 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
         },
 
         componentWillReceiveProps: function(nextProps) {
-            console.log("will receive new");
-            React.findDOMNode(this.refs.exercisesPanel).scrollTop = 0;
+            console.log("Exercises.jsx:will receive new props");
+            // Every new timepoint results in an update of the props
+            // but we don't want to scroll to top in that case
+            if (!this.props.exerciseManager.isExerciseTimePointsInProgress()) {
+                React.findDOMNode(this.refs.exercisesPanel).scrollTop = 0;
+            }
         },
 
         timerDone: function () {
@@ -40807,7 +40820,7 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
 
         restartTimePoints: function () {
             var exerciseManager = this.props.exerciseManager;
-            exerciseManager.exerciseTimePointsRestart();
+            exerciseManager.exerciseTimePointsReset();
             exerciseManager.exerciseTimePointsInProgress();
             this.props.stateChanged(this.props.exerciseManager);
         },
@@ -40818,7 +40831,8 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
         },
 
         onStartClick: function() {
-            this.props.exerciseManager.start();
+            console.log("Exercises:start");
+            this.props.exerciseManager.startTimepoints();
         },
 
         render: function () {
