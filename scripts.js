@@ -18631,7 +18631,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
         ExerciseState[ExerciseState["List"] = 3] = "List";
     })(ExerciseState || (ExerciseState = {}));
     var ExerciseManager = (function () {
-        function ExerciseManager(resourceName, exercisesCollection, rootUri) {
+        function ExerciseManager(resourceName, exercisesCollection, rootUri, stateChanged) {
             var dsl = new CommonMarkDsl(resourceName, exercisesCollection);
             this.rootUri = rootUri;
             this.title = dsl.parseHeader(1);
@@ -18677,6 +18677,7 @@ define('scripts/ExerciseManager',["require", "exports", "scripts/CommonMarkDsl"]
                 });
             }
             this.duration = 90;
+            this._stateChanged = stateChanged;
             this.go(0);
         }
         ExerciseManager.prototype.setStateChanged = function (stateChanged) {
@@ -40789,13 +40790,13 @@ define('scripts/components/Exercises',['require','react','scripts/components/Cir
             exerciseManager: React.PropTypes.any.isRequired,
             stateChanged: React.PropTypes.func.isRequired       // stateChanged function gets ExerciseManager as parameter
         },
-        componentWillMount: function () {
-            this.props.exerciseManager.setStateChanged(this.props.stateChanged);
-        },
-
-        componentWillUnmount: function () {
-            this.props.exerciseManager.setStateChanged(null);
-        },
+        //componentWillMount: function () {
+        //    this.props.exerciseManager.setStateChanged(this.props.stateChanged);
+        //},
+        //
+        //componentWillUnmount: function () {
+        //    this.props.exerciseManager.setStateChanged(null);
+        //},
 
         componentWillReceiveProps: function(nextProps) {
             console.log("Exercises.jsx:will receive new props");
@@ -41323,7 +41324,7 @@ require(['jquery', 'appframework', 'fastclick',
             var context = { rootUri: source.substring(0, source.lastIndexOf( "/" )) };
             $.get(source + "?v=" + Math.random().toString(), function (exercisesMarkdown) {
                 $.afui.hideMask();
-                var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri);
+                var exerciseManager =  new ExerciseManager(source, exercisesMarkdown, this.rootUri, renderExercise);
                 // For now: autostart
                 exerciseManager.start();
                 renderExercise(exerciseManager);
