@@ -8767,11 +8767,12 @@ body {
   margin: 0;
   padding: 0; }
 .panel h1 {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   background: #ff9b00;
   color: white;
   text-align: center;
+  font-size: 20px;
   border-radius: 6px; }
 .menuIndexTitle {
   margin: 10px;
@@ -8782,14 +8783,14 @@ body {
   font-weight: bold; }
 .stepList {
   margin: 0px !important;
-  border-width: 3px !important; }
+  border-width: 1px !important; }
   .stepList li {
     margin-left: 0px !important;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-width: 2px; }
+    border-width: 1px; }
 .stepItem {
-  padding-right: 10px;
+  padding-right: 10px !important;
   font-size: 18px;
   font-weight: bold; }
 .stepItem.divider {
@@ -8844,6 +8845,23 @@ body {
   font-size: 24px;
   text-align: center;
   border: 0px; }
+.indexBlock {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 44px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  border: 1px solid #ddd; }
+.input-group {
+  padding-top: 2px;
+  padding-right: 4px;
+  padding-left: 4px;
+  padding-bottom: 2px;
+  margin-bottom: 3px; }
 * {
   -ms-touch-action: auto;
   -ms-overflow-style: auto; }
