@@ -41,12 +41,16 @@
             $.afui.autoLaunch = false;
             $(document).ready(function () {
                 setTimeout(function () {
-                    // Fix wrong detection of windows devices
-                    if ($.os.ie) {
+                    if ($.os.ie) { // Fix wrong detection of windows devices
                         var $el=$(document.body);
                         $el.removeClass("ios ios7 win8 tizen bb android light dark firefox");
                         $el.addClass("win8.light");
+                    } else if($.os.android) { // force android to light theme
+                        var $el=$(document.body);
+                        $el.removeClass("ios ios7 win8 tizen bb android light dark firefox");
+                        $el.addClass("android.light");
                     }
+
                     $.afui.launch();
                 }, 500);
             });
