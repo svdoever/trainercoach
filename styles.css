@@ -8866,3 +8866,5 @@ body {
 * {
   -ms-touch-action: auto;
   -ms-overflow-style: auto; }
+.ios7 .view header {
+  margin-top: 20px; }
