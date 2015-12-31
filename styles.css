@@ -24,12 +24,12 @@ body {
   overflow-x: hidden;
   -webkit-text-size-adjust: none;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #000000;
+  color: #000;
   font-size: 14px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-box-align: stretch;
-  background: #ffffff;
+  background: #fff;
 }
 input,
 textarea {
@@ -75,7 +75,7 @@ p {
   font-size: 18px;
   font-weight: bold;
   left: 27.5%;
-  color: #ffffff;
+  color: #fff;
   padding: 10px 0;
   text-shadow: rgba(0, 0, 0, 0.8) 0 -1px 0;
   text-align: center;
@@ -105,7 +105,7 @@ p {
   font-size: 12px;
   font-weight: normal;
   text-decoration: none;
-  color: #ffffff;
+  color: #fff;
   text-align: center;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -165,8 +165,8 @@ p {
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  background: #ffffff;
-  color: #000000;
+  background: #fff;
+  color: #000;
   overflow: hidden;
 }
 .panel {
@@ -1345,10 +1345,10 @@ body #af_actionsheet a {
   text-shadow: none;
 }
 .view header {
-  background: #0088d1;
+  background: #0088D1;
   border: none;
-  border-bottom: 1px solid #0088d1;
-  color: #ffffff;
+  border-bottom: 1px solid #0088D1;
+  color: #fff;
 }
 .view header h1 {
   text-shadow: none;
@@ -1380,13 +1380,13 @@ body #af_actionsheet a {
   position: absolute;
 }
 .view footer {
-  background: #0088d1;
+  background: #0088D1;
   border: none;
-  border-top: 1px solid #0088d1;
+  border-top: 1px solid #0088D1;
   box-shadow: none;
 }
 .view footer > a {
-  color: #ffffff;
+  color: #fff;
 }
 .view footer > a.pressed:not(.button) {
   border-radius: 0;
@@ -2089,19 +2089,19 @@ input[type="checkbox"]:checked + label:before {
 }
 .button.red {
   color: #fff;
-  text-shadow: 0 -1px 0 #666666;
+  text-shadow: 0 -1px 0 #666;
   background: #B20000;
   border-color: #666;
 }
 .button.green {
   color: #fff;
-  text-shadow: 0 -1px 0 #666666;
+  text-shadow: 0 -1px 0 #666;
   background: #009C0C;
   border-color: #666;
 }
 .button.orange {
   color: #fff;
-  text-shadow: 0 -1px 0 #666666;
+  text-shadow: 0 -1px 0 #666;
   background-color: #FF8000;
   border-color: #666;
 }
@@ -2113,7 +2113,7 @@ input[type="checkbox"]:checked + label:before {
 }
 .button.slate {
   color: #fff;
-  text-shadow: 0 -1px 0 #000000;
+  text-shadow: 0 -1px 0 #000;
   background: #171F28;
   border-color: #666;
 }
@@ -3151,7 +3151,7 @@ header .menuButton:after {
 .android .view header {
   background: inherit;
   color: inherit;
-  border-color: #33b5e5;
+  border-color: #33B5E5;
 }
 .android .view header .button {
   color: inherit;
@@ -3166,7 +3166,7 @@ header .menuButton:after {
 .android .view footer {
   box-shadow: none;
   background: inherit;
-  border-top: 2px solid #33b5e5;
+  border-top: 2px solid #33B5E5;
   border-bottom: none;
   padding: 0;
 }
@@ -3176,7 +3176,7 @@ header .menuButton:after {
 }
 .android .view footer > a.pressed:not(.button) {
   border: 0px;
-  border-top: 1px solid #33b5e5;
+  border-top: 1px solid #33B5E5;
   border-radius: 0px;
   background: none;
 }
@@ -3230,7 +3230,7 @@ header .menuButton:after {
   width: 21px;
   height: 21px;
   border-radius: 40px;
-  background: #33b5e5;
+  background: #33B5E5;
 }
 .android input.toggle + label:after {
   color: inherit;
@@ -3245,7 +3245,7 @@ header .menuButton:after {
   height: 29px;
 }
 .android input.toggle:checked + label {
-  background: #33b5e5;
+  background: #33B5E5;
 }
 .android label {
   color: inherit;
@@ -3254,7 +3254,7 @@ header .menuButton:after {
   border-radius: 0;
 }
 .android input[type="checkbox"]:not(.toggle):checked + label:before {
-  color: #33b5e5;
+  color: #33B5E5;
   background: white;
 }
 .android .button {
@@ -3343,7 +3343,7 @@ header .menuButton:after {
 }
 .android #af_actionsheet {
   border: #666 1px solid;
-  border-top: #33b5e5 3px solid;
+  border-top: #33B5E5 3px solid;
   background: #555;
   color: inherit;
   margin: -20px 20px 0 20px;
@@ -3377,11 +3377,15 @@ header .menuButton:after {
 }
 .android.light #af_actionsheet {
   border: #bbb 1px solid;
-  border-top: #33b5e5 3px solid;
+  border-top: #33B5E5 3px solid;
   background: #bbb;
 }
 .android.light #af_actionsheet a {
   background: #fff;
+}
+.android.light .view header h1 {
+  color: black;
+  text-shadow: none;
 }
 .android .view .panel {
   background: inherit;
@@ -3419,13 +3423,13 @@ header .menuButton:after {
   border-bottom: 1px solid #ccc;
 }
 .android:not(.light) input[type="radio"]:not(.toggle):checked + label:before {
-  background: #33b5e5;
+  background: #33B5E5;
   border: 2px solid white;
 }
 .android .button.pressed,
 .android header .button-grouped  > .button.pressed {
-  background: #33b5e5;
-  border-color: #33b5e5;
+  background: #33B5E5;
+  border-color: #33B5E5;
 }
 .android .afPopup  > FOOTER  > A,
 .android.light .afPopup  > FOOTER  > A {
@@ -4454,10 +4458,10 @@ body #af_actionsheet a {
   text-shadow: none;
 }
 .view header {
-  background: #0088d1;
+  background: #0088D1;
   border: none;
-  border-bottom: 1px solid #0088d1;
-  color: #ffffff;
+  border-bottom: 1px solid #0088D1;
+  color: #fff;
 }
 .view header h1 {
   text-shadow: none;
@@ -4489,13 +4493,13 @@ body #af_actionsheet a {
   position: absolute;
 }
 .view footer {
-  background: #0088d1;
+  background: #0088D1;
   border: none;
-  border-top: 1px solid #0088d1;
+  border-top: 1px solid #0088D1;
   box-shadow: none;
 }
 .view footer > a {
-  color: #ffffff;
+  color: #fff;
 }
 .view footer > a.pressed:not(.button) {
   border-radius: 0;
@@ -4720,10 +4724,10 @@ input[type="checkbox"]:checked + label:before {
 }
 .bb .view header {
   background: #00609E;
-  background: -ms-linear-gradient(65deg, #00609e 0%, #00afee 100%);
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #00609e), color-stop(100%, #00afee));
-  background: -webkit-linear-gradient(65deg, #00609e 0%, #00afee 100%);
-  background: linear-gradient(65deg, #00609e 0%, #00afee 100%);
+  background: -ms-linear-gradient(65deg, #00609E 0%, #00AFEE 100%);
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #00609E), color-stop(100%, #00AFEE));
+  background: -webkit-linear-gradient(65deg, #00609E 0%, #00AFEE 100%);
+  background: linear-gradient(65deg, #00609E 0%, #00AFEE 100%);
   border-style: solid;
   border-width: 1px;
   border-color: #009CE1 transparent #004E92 transparent;
@@ -4839,7 +4843,7 @@ input[type="checkbox"]:checked + label:before {
 .bb view header .button {
   color: #fff;
   background: none;
-  text-shadow: 0 -1px 0 #333333;
+  text-shadow: 0 -1px 0 #333;
   border-color: transparent;
 }
 .bb .list {
@@ -4861,10 +4865,10 @@ input[type="checkbox"]:checked + label:before {
   color: white;
   border-radius: 2px;
   background: #00609E;
-  background: -ms-linear-gradient(65deg, #00609e 0%, #00afee 100%);
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #00609e), color-stop(100%, #00afee));
-  background: -webkit-linear-gradient(65deg, #00609e 0%, #00afee 100%);
-  background: linear-gradient(65deg, #00609e 0%, #00afee 100%);
+  background: -ms-linear-gradient(65deg, #00609E 0%, #00AFEE 100%);
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #00609E), color-stop(100%, #00AFEE));
+  background: -webkit-linear-gradient(65deg, #00609E 0%, #00AFEE 100%);
+  background: linear-gradient(65deg, #00609E 0%, #00AFEE 100%);
 }
 .bb .afPopup > div {
   text-align: center;
@@ -5055,19 +5059,19 @@ input[type="checkbox"]:checked + label:before {
 }
 .button.red {
   color: #fff;
-  text-shadow: 0 -1px 0 #666666;
+  text-shadow: 0 -1px 0 #666;
   background: #B20000;
   border-color: #666;
 }
 .button.green {
   color: #fff;
-  text-shadow: 0 -1px 0 #666666;
+  text-shadow: 0 -1px 0 #666;
   background: #009C0C;
   border-color: #666;
 }
 .button.orange {
   color: #fff;
-  text-shadow: 0 -1px 0 #666666;
+  text-shadow: 0 -1px 0 #666;
   background-color: #FF8000;
   border-color: #666;
 }
@@ -5079,7 +5083,7 @@ input[type="checkbox"]:checked + label:before {
 }
 .button.slate {
   color: #fff;
-  text-shadow: 0 -1px 0 #000000;
+  text-shadow: 0 -1px 0 #000;
   background: #171F28;
   border-color: #666;
 }
@@ -6356,12 +6360,12 @@ body {
   overflow-x: hidden;
   -webkit-text-size-adjust: none;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #000000;
+  color: #000;
   font-size: 14px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-box-align: stretch;
-  background: #ffffff;
+  background: #fff;
 }
 input,
 textarea {
@@ -6407,7 +6411,7 @@ p {
   font-size: 18px;
   font-weight: bold;
   left: 27.5%;
-  color: #ffffff;
+  color: #fff;
   padding: 10px 0;
   text-shadow: rgba(0, 0, 0, 0.8) 0 -1px 0;
   text-align: center;
@@ -6437,7 +6441,7 @@ p {
   font-size: 12px;
   font-weight: normal;
   text-decoration: none;
-  color: #ffffff;
+  color: #fff;
   text-align: center;
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -6497,8 +6501,8 @@ p {
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  background: #ffffff;
-  color: #000000;
+  background: #fff;
+  color: #000;
   overflow: hidden;
 }
 .panel {
@@ -6990,7 +6994,7 @@ header .menuButton:after {
   -webkit-perspective: 1000;
 }
 .win8 .view footer > a.icon.pressed:not(.button):before {
-  background-color: #00aba9;
+  background-color: #00ABA9;
 }
 .win8 .view footer > a.icon:not(.button):before {
   width: 35px;
@@ -7053,7 +7057,7 @@ header .menuButton:after {
   height: 28px;
 }
 .win8 input.toggle:checked + label {
-  background: #00aba9;
+  background: #00ABA9;
 }
 .win8 .button {
   border-radius: 0;
@@ -7065,7 +7069,7 @@ header .menuButton:after {
   box-shadow: none;
 }
 .win8 .button.pressed {
-  background: #00aba9;
+  background: #00ABA9;
 }
 .win8 .button-grouped > .button {
   border: 3px solid #fff;
@@ -7085,7 +7089,7 @@ header .menuButton:after {
   border-color: #fff;
 }
 .win8 .header .button-grouped > .button.pressed {
-  background: #00aba9;
+  background: #00ABA9;
 }
 .win8 .afPopup {
   width: 100%;
@@ -7152,8 +7156,8 @@ header .menuButton:after {
   z-index: 1;
   width: 15px;
   height: 15px;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, #cccccc));
-  background-image: gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, #cccccc));
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ccc), color-stop(100%, #ccc));
+  background-image: gradient(linear, left top, left bottom, color-stop(0%, #ccc), color-stop(100%, #ccc));
 }
 .win8.light .view footer {
   background: #F2F2F2;
@@ -7174,7 +7178,7 @@ header .menuButton:after {
 }
 .win8 .list .divider,
 .win8 #menu.tabletMenu .list .divider {
-  background: #00aba9;
+  background: #00ABA9;
   padding: 5px;
   display: inline;
   font-size: 16px;
@@ -7249,7 +7253,7 @@ header .menuButton:after {
 }
 .win8 input[type="radio"]:not(.toggle):checked + label:before,
 .win8 input[type="checkbox"]:not(.toggle):checked + label:before {
-  background: #00aba9;
+  background: #00ABA9;
 }
 @font-face {
 	font-family: 'IcoMoon';
