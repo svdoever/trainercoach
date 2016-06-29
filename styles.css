@@ -8778,6 +8778,12 @@ body {
   text-align: center;
   font-size: 20px;
   border-radius: 6px; }
+.exerciseTitle {
+  font-size: 18px;
+  font-weight: bold; }
+.exerciseSubTitle {
+  font-size: 10px;
+  font-weight: lighter; }
 .indexTitle {
   margin: 10px;
   font-size: 24px;
@@ -8795,9 +8801,7 @@ body {
     padding-bottom: 5px;
     border-width: 1px; }
 .stepItem {
-  padding-right: 10px !important;
-  font-size: 18px;
-  font-weight: bold; }
+  padding-right: 10px !important; }
 .stepItem.divider {
   padding-left: 0px;
   padding-right: 0px;
